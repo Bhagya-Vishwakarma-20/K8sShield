@@ -44,6 +44,40 @@ from .models import AttackPath, ClusterGraph
 logger = logging.getLogger("kubeattackviz.temporal")
 
 
+def _load_dotenv() -> None:
+    """Best-effort .env loader without external dependencies."""
+    candidates = [
+        Path.cwd() / ".env",
+        Path(__file__).resolve().parents[2] / ".env",
+        Path(__file__).resolve().parents[1] / ".env",
+    ]
+    seen: set[Path] = set()
+
+    for env_path in candidates:
+        if env_path in seen:
+            continue
+        seen.add(env_path)
+
+        if not env_path.exists() or not env_path.is_file():
+            continue
+
+        try:
+            for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+                line = raw_line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if key:
+                    os.environ.setdefault(key, value)
+        except Exception as e:
+            logger.debug(f"Skipping .env load from {env_path}: {e}")
+
+
+_load_dotenv()
+
+
 # ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║  Data Models                                                                ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
@@ -646,20 +680,31 @@ class Neo4jExporter:
 
     def __init__(
         self,
-        uri: str = "neo4j+s://e64992c1.databases.neo4j.io",
-        user: str = "e64992c1",
-        password: str = "qdcx2SZBRb7alCDWJqn1up5ByNl527G-SUdnvcbC9m0",
+        uri: str | None = None,
+        user: str | None = None,
+        password: str | None = None,
         database: str | None = None,
     ):
-        self._uri = uri
-        self._user = user
-        self._password = password
-        self._database = None
+        self._uri = uri or os.getenv("NEO4J_URI", "")
+        self._user = user or os.getenv("NEO4J_USER", "")
+        self._password = password or os.getenv("NEO4J_PASSWORD", "")
+        self._database = database or os.getenv("NEO4J_DATABASE")
         self._driver = None
 
     def _get_driver(self):
         """Lazy-initialize the Neo4j driver."""
         if self._driver is None:
+            missing = []
+            if not self._uri:
+                missing.append("NEO4J_URI")
+            if not self._user:
+                missing.append("NEO4J_USER")
+            if not self._password:
+                missing.append("NEO4J_PASSWORD")
+            if missing:
+                raise ValueError(
+                    "Missing Neo4j configuration. Set: " + ", ".join(missing)
+                )
             try:
                 from neo4j import GraphDatabase
                 self._driver = GraphDatabase.driver(

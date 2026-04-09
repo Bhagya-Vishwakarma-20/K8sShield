@@ -67,9 +67,9 @@ from kube_attack_viz.temporal import (
 DEFAULT_GRAPH_PATH   = _ROOT / "cluster-graph.json"
 DEFAULT_INTERVAL     = 15          # seconds between polls
 DEFAULT_PERSIST_DIR  = _ROOT / ".temporal_snapshots"
-DEFAULT_NEO4J_URI    = "neo4j+s://022ae0b8.databases.neo4j.io"
-DEFAULT_NEO4J_USER   = "022ae0b8"
-DEFAULT_NEO4J_PASS   = "KdyEnaYjVgjOn2k7GQgXPVxIErQ1ggEQwfyZrYxf-s4"
+DEFAULT_NEO4J_URI    = os.getenv("NEO4J_URI", "")
+DEFAULT_NEO4J_USER   = os.getenv("NEO4J_USER", "")
+DEFAULT_NEO4J_PASS   = os.getenv("NEO4J_PASSWORD", "")
 
 # ─── ANSI helpers ─────────────────────────────────────────────────────────────
 class C:

@@ -126,8 +126,8 @@ python main.py blast-radius --input ../cluster-graph.json --source "internet" --
 # RBAC audit
 python main.py rbac-audit --input ../cluster-graph.json
 
-# Built-in deterministic tests
-python main.py run-tests
+# Built-in deterministic tests ( for algorithm verifications )
+python main.py run-tests 
 ```
 
 ## Key Outputs

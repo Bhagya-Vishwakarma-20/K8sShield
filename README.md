@@ -160,10 +160,3 @@ python main.py watch --neo4j-uri bolt://localhost:7687 --neo4j-user neo4j --neo4
 - Protect generated graph/report artifacts if they contain sensitive topology data.
 - Avoid exposing local visualization/Neo4j endpoints publicly without access controls.
 
-## License and Contribution
-
-If you plan to open-source or distribute internally, add:
-
-- A LICENSE file aligned with your organization policy
-- CONTRIBUTING.md with coding, testing, and review standards
-- A SECURITY.md for vulnerability disclosure workflow

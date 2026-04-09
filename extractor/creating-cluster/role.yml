@@ -1,0 +1,77 @@
+# Role: can read secrets in data namespace — KEY LINK in attack path 1 and 2
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-secret-reader
+  namespace: data
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]    # can read ALL secrets in data namespace
+
+---
+# Role: can read AND write configmaps in backend — overly broad
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-configmap-admin
+  namespace: backend
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+
+---
+# Role: can list pods and exec into them — lateral movement enabler
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-pod-exec
+  namespace: backend
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec"]
+    verbs: ["get", "list", "create"]    # pods/exec = RCE on any backend pod
+
+---
+# Role: wildcard on all resources in data namespace — CRITICAL misconfiguration
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-data-admin
+  namespace: data
+  labels:
+    misconfigured: "true"
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]              # wildcard — grants everything in data namespace
+    verbs: ["*"]
+
+---
+# Circular role A — grants admin to service-b (DFS cycle test)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-service-a-admin
+  namespace: security-test
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["serviceaccounts", "secrets"]
+    verbs: ["*"]
+
+---
+# Circular role B — grants admin back to service-a (completes the cycle)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-service-b-admin
+  namespace: security-test
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["serviceaccounts", "secrets"]
+    verbs: ["*"]

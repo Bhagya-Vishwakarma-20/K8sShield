@@ -1,0 +1,17 @@
+# kind cluster with 1 control-plane + 3 worker nodes
+# "10 nodes" in the problem = 10 graph nodes (pods/services), not 10 physical machines
+# 4 kind nodes is the realistic local setup
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+name: k8s-attack-lab
+
+nodes:
+  - role: control-plane
+  - role: worker   # frontend workloads
+  - role: worker   # backend workloads  
+  - role: worker   # database / secrets tier
+
+networking:
+  disableDefaultCNI: false
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/12"

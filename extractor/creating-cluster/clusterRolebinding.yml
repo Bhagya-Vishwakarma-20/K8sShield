@@ -1,0 +1,16 @@
+# ATTACK PATH 4:
+# sa-monitor gets cluster-wide read — including secrets in data namespace
+# This is a very common real-world misconfiguration
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: crb-monitor-cluster-reader
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-monitor
+    namespace: monitoring
+roleRef:
+  kind: ClusterRole
+  name: cr-cluster-reader
+  apiGroup: rbac.authorization.k8s.io

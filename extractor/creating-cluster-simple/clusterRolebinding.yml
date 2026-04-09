@@ -1,0 +1,13 @@
+# sa-web can read node info (common requirement)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: crb-web-node-reader
+subjects:
+  - kind: ServiceAccount
+    name: sa-web
+    namespace: app
+roleRef:
+  kind: ClusterRole
+  name: cr-node-reader
+  apiGroup: rbac.authorization.k8s.io

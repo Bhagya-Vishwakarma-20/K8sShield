@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "cluster": "test-cycle",
+    "generated": "2026-04-05",
+    "node_count": 5,
+    "edge_count": 6,
+    "pre_planted_paths": 1,
+    "description": "Test Case 3: Graph with a cycle B→C→D→B plus an entry A→B and exit D→E. Tests DFS cycle detection and that Dijkstra still finds the shortest non-looping path."
+  },
+  "nodes": [
+    {"id": "A", "type": "User",           "name": "dev-user",      "namespace": "default",  "risk_score": 5.0,  "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",            "name": "app-pod",       "namespace": "default",  "risk_score": 6.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "ServiceAccount", "name": "sa-app",        "namespace": "default",  "risk_score": 4.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "Role",           "name": "escalate-role", "namespace": "default",  "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "E", "type": "Secret",         "name": "admin-token",   "namespace": "kube-system", "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "can-exec",    "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "C", "relationship": "uses",        "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "C", "target": "D", "relationship": "bound-to",    "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "B", "relationship": "escalates",   "weight": 1.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "E", "relationship": "can-read",    "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "E", "relationship": "can-read",    "weight": 20.0,"cve": null, "cvss": null}
+  ]
+}

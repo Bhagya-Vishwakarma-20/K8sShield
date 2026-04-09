@@ -1,0 +1,197 @@
+
+╔════════════════════════════════════════════════════════════════════╗
+║              KUBERNETES ATTACK PATH — KILL CHAIN REPORT            ║
+║                  Generated: 2026-04-09 10:17:46 UTC                ║
+║                      Tool: KubeAttackViz v2.0.0                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+======================================================================
+  GRAPH OVERVIEW
+======================================================================
+  Total Nodes: 26
+  Total Edges: 21
+  Source Nodes (Entry Points): 2
+  Sink Nodes (Targets): 2
+  Is DAG: Yes
+  Weakly Connected Components: 5
+
+  Node Types:
+    configmap: 1
+    deployment: 2
+    namespace: 1
+    node: 2
+    pod: 16
+    role: 1
+    service: 3
+
+  Relationship Types:
+    creates: 2
+    reads: 1
+    routes-to: 2
+    scheduled-on: 16
+======================================================================
+======================================================================
+  ATTACK PATHS (Sorted by Risk — Ascending)
+======================================================================
+
+  ─── Path #1 ───
+  Path: backend-svc → backend-7f5d966cb-s7c2f → kind-worker
+  Hops: 2 | Risk: 0.95 | Severity: LOW
+    backend-svc ──[routes-to]──▸ backend-7f5d966cb-s7c2f  (CVE: CVE-2023-41056, CVSS: 8.1)
+    backend-7f5d966cb-s7c2f ──[scheduled-on]──▸ kind-worker  (CVE: CVE-2023-41056, CVSS: 8.1)
+
+  ─── Path #2 ───
+  Path: frontend-svc → frontend-68457cd5d9-9d24b → kind-worker
+  Hops: 2 | Risk: 5.00 | Severity: LOW
+    frontend-svc ──[routes-to]──▸ frontend-68457cd5d9-9d24b  (CVE: —, CVSS: —)
+    frontend-68457cd5d9-9d24b ──[scheduled-on]──▸ kind-worker  (CVE: —, CVSS: —)
+======================================================================
+
+======================================================================
+  ATTACK PATH REMEDIATION
+======================================================================
+
+  ─── Path #1 Remediation ───
+    [Hop 1] backend-svc → backend-7f5d966cb-s7c2f: Review the 'routes-to' relationship between backend-svc and backend-7f5d966cb-s7c2f.
+      ⚠ Patch CVE-2023-41056 (CVSS: 8.1). Apply the latest security update to the affected component.
+      → Review pod security context. Enforce non-root, read-only filesystem, drop capabilities.
+    [Hop 2] backend-7f5d966cb-s7c2f → kind-worker: Review the 'scheduled-on' relationship between backend-7f5d966cb-s7c2f and kind-worker.
+      ⚠ Patch CVE-2023-41056 (CVSS: 8.1). Apply the latest security update to the affected component.
+
+  ─── Path #2 Remediation ───
+    [Hop 1] frontend-svc → frontend-68457cd5d9-9d24b: Review the 'routes-to' relationship between frontend-svc and frontend-68457cd5d9-9d24b.
+      → Review pod security context. Enforce non-root, read-only filesystem, drop capabilities.
+    [Hop 2] frontend-68457cd5d9-9d24b → kind-worker: Review the 'scheduled-on' relationship between frontend-68457cd5d9-9d24b and kind-worker.
+======================================================================
+======================================================================
+  BLAST RADIUS ANALYSIS
+======================================================================
+  Source: backend-svc (svc-backend-svc)
+  Max Depth: 3
+  Total Affected Nodes: 2
+----------------------------------------------------------------------
+
+  Hop 1 (1 node(s)):
+    ├── backend-7f5d966cb-s7c2f [pod] (risk: 6.5)
+
+  Hop 2 (1 node(s)):
+    ├── kind-worker [node] (risk: 9.0)
+======================================================================
+======================================================================
+  BLAST RADIUS ANALYSIS
+======================================================================
+  Source: frontend-svc (svc-frontend-svc)
+  Max Depth: 3
+  Total Affected Nodes: 3
+----------------------------------------------------------------------
+
+  Hop 1 (1 node(s)):
+    ├── frontend-68457cd5d9-9d24b [pod] (risk: 4.0)
+
+  Hop 2 (2 node(s)):
+    ├── frontend-config [configmap] (risk: 3.0)
+    ├── kind-worker [node] (risk: 9.0)
+======================================================================
+======================================================================
+  CYCLE DETECTION (Privilege Escalation Loops)
+======================================================================
+  Total Unique Cycles: 0
+----------------------------------------------------------------------
+  No cycles detected — graph is a DAG.
+======================================================================
+
+======================================================================
+  CYCLE REMEDIATION
+======================================================================
+    No privilege escalation cycles detected.
+======================================================================
+======================================================================
+  CRITICAL NODE ANALYSIS (Graph Surgery)
+======================================================================
+  Baseline Source→Sink Paths: 2
+----------------------------------------------------------------------
+
+  #1 backend-7f5d966cb-s7c2f [pod]
+      ID: pod-backend-7f5d966cb-s7c2f
+      Paths Eliminated: 1 / 2 (50.0%)
+      ⚡ Remove this node → eliminates 1 attack path(s)
+
+  #2 frontend-68457cd5d9-9d24b [pod]
+      ID: pod-frontend-68457cd5d9-9d24b
+      Paths Eliminated: 1 / 2 (50.0%)
+      ⚡ Remove this node → eliminates 1 attack path(s)
+======================================================================
+
+======================================================================
+  CRITICAL NODE REMEDIATION
+======================================================================
+    Remove/harden node 'backend-7f5d966cb-s7c2f' [pod] → eliminates 1 of 2 attack paths.
+      → Review pod security context. Enforce non-root, read-only filesystem, drop capabilities.
+    Remove/harden node 'frontend-68457cd5d9-9d24b' [pod] → eliminates 1 of 2 attack paths.
+      → Review pod security context. Enforce non-root, read-only filesystem, drop capabilities.
+======================================================================
+======================================================================
+  ATTACK PATH CLASSIFICATION
+======================================================================
+
+  Path #1: backend-svc → backend-7f5d966cb-s7c2f → kind-worker
+    Categories: General Access
+    Advanced Score: 2.59
+    Risk: 0.95 | Hops: 2 | Severity: LOW
+
+  Path #2: frontend-svc → frontend-68457cd5d9-9d24b → kind-worker
+    Categories: General Access
+    Advanced Score: 3.40
+    Risk: 5.00 | Hops: 2 | Severity: LOW
+======================================================================
+======================================================================
+  RBAC RISK ANALYSIS
+======================================================================
+  Total Findings: 0
+    HIGH: 0 | MEDIUM: 0 | LOW: 0
+----------------------------------------------------------------------
+  No RBAC risks detected.
+======================================================================
+
+======================================================================
+  NATURAL LANGUAGE PATH EXPLANATION (Highest-Risk Path)
+======================================================================
+An attacker who compromises the service 'frontend-svc' can reach the cluster node 'kind-worker' in 2 step(s).
+This is a LOW-severity path classified as: General Access.
+
+Attack chain:
+  Step 1: The service 'frontend-svc' has a 'routes-to' relationship with the pod 'frontend-68457cd5d9-9d24b'.
+  Step 2: The pod 'frontend-68457cd5d9-9d24b' has a 'scheduled-on' relationship with the cluster node 'kind-worker'.
+
+Total risk score: 5.00. An attacker traversing this path gains access to the cluster node 'kind-worker', which is flagged as a high-value target.
+
+The most critical chokepoint in this cluster is the pod 'backend-7f5d966cb-s7c2f'. If this resource is hardened or removed, it would eliminate 1 out of 2 attack paths (50.0%).
+
+This means 'backend-7f5d966cb-s7c2f' acts as a bottleneck through which a majority of attack paths must pass. Hardening this single resource provides the highest security return on investment.
+
+Other significant chokepoints:
+  • 'frontend-68457cd5d9-9d24b' — eliminates 1 paths
+======================================================================
+
+╔════════════════════════════════════════════════════════════════════╗
+║                          EXECUTIVE SUMMARY                         ║
+╚════════════════════════════════════════════════════════════════════╝
+
+  Attack Paths Found: 2
+    CRITICAL: 0
+    HIGH:     0
+    MEDIUM:   0
+    LOW:      2
+
+  Privilege Escalation Cycles: 0
+  Baseline Source→Sink Paths: 2
+
+  🔴 Most Critical Node: backend-7f5d966cb-s7c2f
+     Removing it eliminates 1 of 2 paths (50.0%).
+
+  ✓  Cluster posture is acceptable. Continue monitoring.
+
+======================================================================
+  Report generated at 2026-04-09 10:17:46 UTC
+  Tool: KubeAttackViz v2.0.0 — Kubernetes Attack Path Visualizer
+======================================================================

@@ -1,0 +1,552 @@
+{
+  "namespace": "data",
+  "resources": {
+    "pods": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "generateName": "production-db-65d6cff9bb-",
+            "generation": 1,
+            "labels": {
+              "app": "production-db",
+              "pod-template-hash": "65d6cff9bb"
+            },
+            "name": "production-db-65d6cff9bb-7xkss",
+            "namespace": "data",
+            "ownerReferences": [
+              {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "production-db-65d6cff9bb",
+                "uid": "28a06c96-0e05-4c06-936e-e5f2b3333bc3"
+              }
+            ],
+            "resourceVersion": "551",
+            "uid": "218d09e0-9f83-4550-a9ff-d6a37561f008"
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "POSTGRES_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "password",
+                        "name": "secret-db-credentials"
+                      }
+                    }
+                  }
+                ],
+                "image": "postgres:13",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "postgres",
+                "ports": [
+                  {
+                    "containerPort": 5432,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-m6xjb",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "enableServiceLinks": true,
+            "nodeName": "k8s-simple-lab-worker",
+            "preemptionPolicy": "PreemptLowerPriority",
+            "priority": 0,
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {},
+            "serviceAccount": "sa-db",
+            "serviceAccountName": "sa-db",
+            "terminationGracePeriodSeconds": 30,
+            "tolerations": [
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              },
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              }
+            ],
+            "volumes": [
+              {
+                "name": "kube-api-access-m6xjb",
+                "projected": {
+                  "defaultMode": 420,
+                  "sources": [
+                    {
+                      "serviceAccountToken": {
+                        "expirationSeconds": 3607,
+                        "path": "token"
+                      }
+                    },
+                    {
+                      "configMap": {
+                        "items": [
+                          {
+                            "key": "ca.crt",
+                            "path": "ca.crt"
+                          }
+                        ],
+                        "name": "kube-root-ca.crt"
+                      }
+                    },
+                    {
+                      "downwardAPI": {
+                        "items": [
+                          {
+                            "fieldRef": {
+                              "apiVersion": "v1",
+                              "fieldPath": "metadata.namespace"
+                            },
+                            "path": "namespace"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "status": {
+            "conditions": [
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "observedGeneration": 1,
+                "status": "False",
+                "type": "PodReadyToStartContainers"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Initialized"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "message": "containers with unready status: [postgres]",
+                "observedGeneration": 1,
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "Ready"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "message": "containers with unready status: [postgres]",
+                "observedGeneration": 1,
+                "reason": "ContainersNotReady",
+                "status": "False",
+                "type": "ContainersReady"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodScheduled"
+              }
+            ],
+            "containerStatuses": [
+              {
+                "image": "postgres:13",
+                "imageID": "",
+                "lastState": {},
+                "name": "postgres",
+                "ready": false,
+                "restartCount": 0,
+                "started": false,
+                "state": {
+                  "waiting": {
+                    "reason": "ContainerCreating"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-m6xjb",
+                    "readOnly": true,
+                    "recursiveReadOnly": "Disabled"
+                  }
+                ]
+              }
+            ],
+            "hostIP": "172.21.0.6",
+            "hostIPs": [
+              {
+                "ip": "172.21.0.6"
+              }
+            ],
+            "observedGeneration": 1,
+            "phase": "Pending",
+            "qosClass": "BestEffort",
+            "startTime": "2026-04-08T19:50:21Z"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "services": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"postgres-svc\",\"namespace\":\"data\"},\"spec\":{\"ports\":[{\"port\":5432,\"protocol\":\"TCP\",\"targetPort\":5432}],\"selector\":{\"app\":\"production-db\"},\"type\":\"ClusterIP\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:22Z",
+            "name": "postgres-svc",
+            "namespace": "data",
+            "resourceVersion": "559",
+            "uid": "d74d4363-3db6-4701-81ee-974d1add85c8"
+          },
+          "spec": {
+            "clusterIP": "10.96.156.28",
+            "clusterIPs": [
+              "10.96.156.28"
+            ],
+            "internalTrafficPolicy": "Cluster",
+            "ipFamilies": [
+              "IPv4"
+            ],
+            "ipFamilyPolicy": "SingleStack",
+            "ports": [
+              {
+                "port": 5432,
+                "protocol": "TCP",
+                "targetPort": 5432
+              }
+            ],
+            "selector": {
+              "app": "production-db"
+            },
+            "sessionAffinity": "None",
+            "type": "ClusterIP"
+          },
+          "status": {
+            "loadBalancer": {}
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "deployments": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {
+              "deployment.kubernetes.io/revision": "1",
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"production-db\"},\"name\":\"production-db\",\"namespace\":\"data\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"production-db\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"production-db\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"POSTGRES_PASSWORD\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"password\",\"name\":\"secret-db-credentials\"}}}],\"image\":\"postgres:13\",\"name\":\"postgres\",\"ports\":[{\"containerPort\":5432}]}],\"serviceAccountName\":\"sa-db\"}}}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "generation": 1,
+            "labels": {
+              "app": "production-db"
+            },
+            "name": "production-db",
+            "namespace": "data",
+            "resourceVersion": "552",
+            "uid": "4a88bb8a-e50c-47a1-bd05-a703c8be1099"
+          },
+          "spec": {
+            "progressDeadlineSeconds": 600,
+            "replicas": 1,
+            "revisionHistoryLimit": 10,
+            "selector": {
+              "matchLabels": {
+                "app": "production-db"
+              }
+            },
+            "strategy": {
+              "rollingUpdate": {
+                "maxSurge": "25%",
+                "maxUnavailable": "25%"
+              },
+              "type": "RollingUpdate"
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "production-db"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "env": [
+                      {
+                        "name": "POSTGRES_PASSWORD",
+                        "valueFrom": {
+                          "secretKeyRef": {
+                            "key": "password",
+                            "name": "secret-db-credentials"
+                          }
+                        }
+                      }
+                    ],
+                    "image": "postgres:13",
+                    "imagePullPolicy": "IfNotPresent",
+                    "name": "postgres",
+                    "ports": [
+                      {
+                        "containerPort": 5432,
+                        "protocol": "TCP"
+                      }
+                    ],
+                    "resources": {},
+                    "terminationMessagePath": "/dev/termination-log",
+                    "terminationMessagePolicy": "File"
+                  }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "sa-db",
+                "serviceAccountName": "sa-db",
+                "terminationGracePeriodSeconds": 30
+              }
+            }
+          },
+          "status": {
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "lastUpdateTime": "2026-04-08T19:50:21Z",
+                "message": "Deployment does not have minimum availability.",
+                "reason": "MinimumReplicasUnavailable",
+                "status": "False",
+                "type": "Available"
+              },
+              {
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "lastUpdateTime": "2026-04-08T19:50:21Z",
+                "message": "ReplicaSet \"production-db-65d6cff9bb\" is progressing.",
+                "reason": "ReplicaSetUpdated",
+                "status": "True",
+                "type": "Progressing"
+              }
+            ],
+            "observedGeneration": 1,
+            "replicas": 1,
+            "terminatingReplicas": 0,
+            "unavailableReplicas": 1,
+            "updatedReplicas": 1
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "roles": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "Role",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"Role\",\"metadata\":{\"annotations\":{},\"name\":\"role-secret-reader\",\"namespace\":\"data\"},\"rules\":[{\"apiGroups\":[\"\"],\"resources\":[\"secrets\"],\"verbs\":[\"get\",\"list\"]}]}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "name": "role-secret-reader",
+            "namespace": "data",
+            "resourceVersion": "522",
+            "uid": "4d81ff1a-039f-4f9b-baa6-8509988519b2"
+          },
+          "rules": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "secrets"
+              ],
+              "verbs": [
+                "get",
+                "list"
+              ]
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "rolebindings": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "RoleBinding",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"RoleBinding\",\"metadata\":{\"annotations\":{},\"name\":\"rb-web-reads-secrets\",\"namespace\":\"data\"},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"Role\",\"name\":\"role-secret-reader\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"sa-web\",\"namespace\":\"app\"}]}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "name": "rb-web-reads-secrets",
+            "namespace": "data",
+            "resourceVersion": "523",
+            "uid": "7e0e36d4-5e96-49ae-9e78-e63ab7859323"
+          },
+          "roleRef": {
+            "apiGroup": "rbac.authorization.k8s.io",
+            "kind": "Role",
+            "name": "role-secret-reader"
+          },
+          "subjects": [
+            {
+              "kind": "ServiceAccount",
+              "name": "sa-web",
+              "namespace": "app"
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "serviceaccounts": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:50:20Z",
+            "name": "default",
+            "namespace": "data",
+            "resourceVersion": "517",
+            "uid": "ed08b99c-585a-49e7-a4d3-3805b2d693fb"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"annotations\":{},\"name\":\"sa-db\",\"namespace\":\"data\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "name": "sa-db",
+            "namespace": "data",
+            "resourceVersion": "519",
+            "uid": "57907227-d0de-4ab8-9033-a391176f8314"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "secrets": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "password": "c3VwZXJzZWNyZXQxMjM=",
+            "username": "cHJvZC1hZG1pbg=="
+          },
+          "kind": "Secret",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"password\":\"c3VwZXJzZWNyZXQxMjM=\",\"username\":\"cHJvZC1hZG1pbg==\"},\"kind\":\"Secret\",\"metadata\":{\"annotations\":{},\"labels\":{\"sensitivity\":\"critical\"},\"name\":\"secret-db-credentials\",\"namespace\":\"data\"},\"type\":\"Opaque\"}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "labels": {
+              "sensitivity": "critical"
+            },
+            "name": "secret-db-credentials",
+            "namespace": "data",
+            "resourceVersion": "520",
+            "uid": "85c83b51-fd16-476f-8915-36eba97eb00f"
+          },
+          "type": "Opaque"
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "configmaps": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIYcLyvW6FiDowDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA0MDgxOTQ0NDlaFw0zNjA0MDUxOTQ5NDlaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQC+IuyH0ibPPyVQRKUvfLC9mgAeXWw5zR2CWyT2Q9gB7aWLpT5lvi83wsQM\nF7gTFMeEUNUb62/WQatbgY/ieDBwdWUOJebIPVUun/ynwkMzkJ7bMIv4450Py5g2\nDTWZv0p2vENjY6/X554briP3rn/ZnR3/yNfbSXeXVNK6TiBULm1mmIvGJKD24oft\nvyeMJQjDyIFfapx0aM1PK5Rf9Ma+PnPN35wm/x13uADMT0x+9Jl/sqzuTXNNzjt5\nHBlSsrbvLIeYe4fqd1UoLl7rXJ0Xnqok3ZV9GZirxh0Cf9vcTSsRViXSEJAYomOR\nTOOsHOQIfviiCBGHSHlXkLLJ6LKjAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSt1LbL+O6d3MqKH37AXA98PNmWJzAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQCYnc/CcaGM\nwH8SVSRoWCF0Ju17QWNwj1QxW3KASgtbJ6WTp+VYNTxDPENdFUr+/9vX0cnpOnN+\ngDwWxrc2/e+YtaE+NkxpwhiIcPxRKOgBlqbFM6EBaOoKQrT8lyB7cSLb2qSliyJY\netFxUZSP7M7TU/cdjR7VbGuv7qaYj31xQMUv64pZueog/qLhWf9WWvW5/j1dA+g/\nmyc53LVPSrTAVcU/mcKmb8KxM+pfdvn8/6NkEteYv/23QwaDaSBKDrKUqQGbDhbB\n+vuvdxRnzq8v9JLh2RMyKciHednYnilPtFPfga895PM+TqeaUP8xopQ7dcm9euHs\nuv5/JToFKzyT\n-----END CERTIFICATE-----\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+            },
+            "creationTimestamp": "2026-04-08T19:50:20Z",
+            "name": "kube-root-ca.crt",
+            "namespace": "data",
+            "resourceVersion": "516",
+            "uid": "a7d770b9-daa0-4170-9bc6-ee8aa3327791"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "networkpolicies": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    }
+  }
+}

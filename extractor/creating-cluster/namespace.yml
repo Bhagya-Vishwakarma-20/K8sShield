@@ -1,0 +1,44 @@
+# frontend namespace — internet-facing entry points
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: frontend
+  labels:
+    team: frontend
+
+---
+# backend namespace — internal services
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: backend
+  labels:
+    team: backend
+
+---
+# data namespace — databases and secrets (crown jewels)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: data
+  labels:
+    team: data
+
+---
+# monitoring namespace — observability stack
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    team: platform
+
+---
+# security namespace — intentionally misconfigured (attack path lives here)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: security-test
+  labels:
+    team: security
+    misconfigured: "true"

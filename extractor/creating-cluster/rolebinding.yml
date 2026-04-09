@@ -1,0 +1,125 @@
+# ATTACK PATH 1:
+# sa-frontend → role-secret-reader (in data ns) via this binding
+# This is the critical misconfiguration: a frontend SA getting data namespace access
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-frontend-reads-secrets
+  namespace: data
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-frontend
+    namespace: frontend           # cross-namespace binding — frontend SA gets data access
+roleRef:
+  kind: Role
+  name: role-secret-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ATTACK PATH 2 (hop 1):
+# sa-backend → role-pod-exec in backend namespace
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-backend-pod-exec
+  namespace: backend
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-backend
+    namespace: backend
+roleRef:
+  kind: Role
+  name: role-pod-exec
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ATTACK PATH 2 (hop 2):
+# sa-backend → role-secret-reader in data namespace
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-backend-reads-secrets
+  namespace: data
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-backend
+    namespace: backend
+roleRef:
+  kind: Role
+  name: role-secret-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ATTACK PATH 3:
+# sa-webapp → role-configmap-admin → reads cm-backend-config (has DB_HOST)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-webapp-configmap-admin
+  namespace: backend
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-webapp
+    namespace: backend
+roleRef:
+  kind: Role
+  name: role-configmap-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# ATTACK PATH 3 (continuation):
+# sa-webapp → role-data-admin (wildcard) — escalates to full data namespace control
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-webapp-data-admin
+  namespace: data
+  labels:
+    misconfigured: "true"
+subjects:
+  - kind: ServiceAccount
+    name: sa-webapp
+    namespace: backend
+roleRef:
+  kind: Role
+  name: role-data-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# CYCLE DETECTION TEST:
+# sa-service-a bound to role-service-a-admin
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-service-a-admin
+  namespace: security-test
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-service-a
+    namespace: security-test
+roleRef:
+  kind: Role
+  name: role-service-a-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# sa-service-b bound to role-service-b-admin (which grants back to service-a)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rb-service-b-admin
+  namespace: security-test
+  labels: {}
+subjects:
+  - kind: ServiceAccount
+    name: sa-service-b
+    namespace: security-test
+roleRef:
+  kind: Role
+  name: role-service-b-admin
+  apiGroup: rbac.authorization.k8s.io

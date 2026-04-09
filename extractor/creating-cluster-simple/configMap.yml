@@ -1,0 +1,12 @@
+# App config — contains DB connection string (navigation clue for attacker)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-app-config
+  namespace: app
+  labels:
+    sensitivity: low
+data:
+  DB_HOST: "postgres-svc.data.svc.cluster.local"
+  DB_PORT: "5432"
+  ENV: "production"

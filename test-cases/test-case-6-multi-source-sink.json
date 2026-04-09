@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "cluster": "test-multi-source-sink",
+    "generated": "2026-04-05",
+    "node_count": 7,
+    "edge_count": 8,
+    "pre_planted_paths": 4,
+    "description": "Test Case 6: Multiple sources (S1, S2) and multiple sinks (T1, T2). Tests all_shortest_paths enumeration and correct sorting by total risk."
+  },
+  "nodes": [
+    {"id": "S1", "type": "ExternalActor", "name": "internet",     "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "S2", "type": "User",          "name": "insider",      "namespace": "default",  "risk_score": 6.0,  "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "M1", "type": "Pod",           "name": "gateway-pod",  "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "M2", "type": "ServiceAccount","name": "sa-priv",      "namespace": "default",  "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "M3", "type": "Role",          "name": "admin-role",   "namespace": "default",  "risk_score": 8.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "T1", "type": "Database",      "name": "prod-db",      "namespace": "data",     "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []},
+    {"id": "T2", "type": "Secret",        "name": "admin-token",  "namespace": "kube-system","risk_score": 10.0,"is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "S1", "target": "M1", "relationship": "reaches",          "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "S2", "target": "M2", "relationship": "impersonates",     "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "M1", "target": "M2", "relationship": "uses",             "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "M2", "target": "M3", "relationship": "bound-to",         "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "M2", "target": "T1", "relationship": "grants-access-to", "weight": 6.0, "cve": null, "cvss": null},
+    {"source": "M3", "target": "T1", "relationship": "can-read",         "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "M3", "target": "T2", "relationship": "can-read",         "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "M1", "target": "T1", "relationship": "grants-access-to", "weight": 10.0,"cve": null, "cvss": null}
+  ]
+}

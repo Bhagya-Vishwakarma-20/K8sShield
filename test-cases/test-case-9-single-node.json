@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "cluster": "test-single-node",
+    "generated": "2026-04-05",
+    "node_count": 1,
+    "edge_count": 0,
+    "pre_planted_paths": 0,
+    "description": "Test Case 9: Single isolated node with no edges. Tests edge cases — BFS returns 0 affected, DFS returns 0 cycles, Dijkstra has no paths."
+  },
+  "nodes": [
+    {"id": "X", "type": "Pod", "name": "lonely-pod", "namespace": "default", "risk_score": 5.0, "is_source": true, "is_sink": true, "cves": []}
+  ],
+  "edges": []
+}

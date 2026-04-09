@@ -1,0 +1,976 @@
+{
+  "metadata": {
+    "generated_at": "2026-04-03T12:05:47.394592",
+    "total_pods_analyzed": 22,
+    "average_risk_score": 1.895909090909091
+  },
+  "pods": [
+    {
+      "name": "backend-api-5fbff55f44-8wtb2",
+      "namespace": "backend",
+      "image": "node:16-alpine",
+      "cves": [
+        {
+          "cve_id": "CVE-2021-22918",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-22921",
+          "cvss_v3_score": 7.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-22931",
+          "cvss_v3_score": 9.8,
+          "cvss_v3_severity": "CRITICAL",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-22940",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-22930",
+          "cvss_v3_score": 9.8,
+          "cvss_v3_severity": "CRITICAL",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-44531",
+          "cvss_v3_score": 7.4,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-44532",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-44533",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2022-29247",
+          "cvss_v3_score": 2.2,
+          "cvss_v3_severity": "LOW",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2022-36313",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2022-29965",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2023-32006",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2023-32002",
+          "cvss_v3_score": 9.8,
+          "cvss_v3_severity": "CRITICAL",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2023-32559",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2023-48681",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2024-35931",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2021-47510",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2024-46797",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2024-56703",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2022-49613",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-21717",
+          "cvss_v3_score": 7.1,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-22075",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-37931",
+          "cvss_v3_score": 5.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-55152",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-58047",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2025-59472",
+          "cvss_v3_score": 5.9,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        },
+        {
+          "cve_id": "CVE-2026-31832",
+          "cvss_v3_score": 5.4,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "node:16-alpine",
+          "component": "node",
+          "version": "16"
+        }
+      ],
+      "cve_score": 9.8,
+      "exposure_score": 5.0,
+      "privilege_score": 9.5,
+      "lateral_score": 1.0,
+      "final_score": 7.87
+    },
+    {
+      "name": "service-a-7dc97db87-zxpxm",
+      "namespace": "security-test",
+      "image": "nginx:latest",
+      "cves": [
+        {
+          "cve_id": "CVE-2022-31182",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-24827",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-53991",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-47056",
+          "cvss_v3_score": 5.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2025-54571",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        }
+      ],
+      "cve_score": 7.5,
+      "exposure_score": 1.0,
+      "privilege_score": 10.0,
+      "lateral_score": 0.0,
+      "final_score": 6.2
+    },
+    {
+      "name": "service-b-7bbb6b44f5-hwt6v",
+      "namespace": "security-test",
+      "image": "nginx:latest",
+      "cves": [
+        {
+          "cve_id": "CVE-2022-31182",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-24827",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-53991",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2024-47056",
+          "cvss_v3_score": 5.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        },
+        {
+          "cve_id": "CVE-2025-54571",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "nginx:latest",
+          "component": "nginx",
+          "version": "latest"
+        }
+      ],
+      "cve_score": 7.5,
+      "exposure_score": 1.0,
+      "privilege_score": 10.0,
+      "lateral_score": 0.0,
+      "final_score": 6.2
+    },
+    {
+      "name": "webapp-7b8c6c4466-qtzkr",
+      "namespace": "backend",
+      "image": "python:3.9-slim",
+      "cves": [
+        {
+          "cve_id": "CVE-2021-32052",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2021-3426",
+          "cvss_v3_score": 5.7,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2021-33571",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-0391",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-26488",
+          "cvss_v3_score": 7.0,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2015-20107",
+          "cvss_v3_score": 7.6,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-42919",
+          "cvss_v3_score": 7.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-45061",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2023-26052",
+          "cvss_v3_score": 3.7,
+          "cvss_v3_severity": "LOW",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-48560",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-48564",
+          "cvss_v3_score": 6.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-48565",
+          "cvss_v3_score": 9.8,
+          "cvss_v3_severity": "CRITICAL",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2022-48566",
+          "cvss_v3_score": 5.9,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2023-40217",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2023-49082",
+          "cvss_v3_score": 5.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2023-49081",
+          "cvss_v3_score": 7.2,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2024-23334",
+          "cvss_v3_score": 5.9,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2024-23829",
+          "cvss_v3_score": 6.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2024-27306",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2024-30251",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2026-33230",
+          "cvss_v3_score": 6.1,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2026-33231",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2026-33236",
+          "cvss_v3_score": 8.1,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        },
+        {
+          "cve_id": "CVE-2026-33332",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "python:3.9-slim",
+          "component": "python",
+          "version": "3.9"
+        }
+      ],
+      "cve_score": 9.8,
+      "exposure_score": 5.0,
+      "privilege_score": 0.0,
+      "lateral_score": 1.0,
+      "final_score": 5.02
+    },
+    {
+      "name": "production-db-68457b7489-zbjnc",
+      "namespace": "data",
+      "image": "postgres:13",
+      "cves": [
+        {
+          "cve_id": "CVE-2016-1255",
+          "cvss_v3_score": 7.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2020-25694",
+          "cvss_v3_score": 8.1,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2020-25695",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2020-25696",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2021-20229",
+          "cvss_v3_score": 4.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2021-3393",
+          "cvss_v3_score": 4.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2021-32027",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-31043",
+          "cvss_v3_score": 7.5,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41113",
+          "cvss_v3_score": 4.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41114",
+          "cvss_v3_score": 6.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41115",
+          "cvss_v3_score": 6.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41116",
+          "cvss_v3_score": 4.3,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41117",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41118",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41119",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2023-41120",
+          "cvss_v3_score": 6.5,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-0985",
+          "cvss_v3_score": 8.0,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-7348",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-10976",
+          "cvss_v3_score": 4.2,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-10977",
+          "cvss_v3_score": 3.1,
+          "cvss_v3_severity": "LOW",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-10978",
+          "cvss_v3_score": 4.2,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2024-10979",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-1094",
+          "cvss_v3_score": 8.1,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-4207",
+          "cvss_v3_score": 5.9,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-8713",
+          "cvss_v3_score": 3.1,
+          "cvss_v3_severity": "LOW",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-8714",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-8715",
+          "cvss_v3_score": 8.8,
+          "cvss_v3_severity": "HIGH",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-12817",
+          "cvss_v3_score": 3.1,
+          "cvss_v3_severity": "LOW",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        },
+        {
+          "cve_id": "CVE-2025-12818",
+          "cvss_v3_score": 5.9,
+          "cvss_v3_severity": "MEDIUM",
+          "image": "postgres:13",
+          "component": "postgres",
+          "version": "13"
+        }
+      ],
+      "cve_score": 8.8,
+      "exposure_score": 5.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 4.52
+    },
+    {
+      "name": "local-path-provisioner-67b8995b4b-f4pt9",
+      "namespace": "local-path-storage",
+      "image": "docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 7.0,
+      "lateral_score": 0.0,
+      "final_score": 2.3
+    },
+    {
+      "name": "frontend-web-7d6685bb7-jd54v",
+      "namespace": "frontend",
+      "image": "nginx:1.21",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 9.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 1.8
+    },
+    {
+      "name": "coredns-7d764666f9-gkgmq",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/coredns/coredns:v1.13.1",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 5.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 1.0
+    },
+    {
+      "name": "coredns-7d764666f9-wcb76",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/coredns/coredns:v1.13.1",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 5.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 1.0
+    },
+    {
+      "name": "monitor-agent-56fddffd8c-42n4j",
+      "namespace": "monitoring",
+      "image": "prom/prometheus:v2.37.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 5.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 1.0
+    },
+    {
+      "name": "etcd-k8s-attack-lab-control-plane",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/etcd:3.6.6-0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 2.0,
+      "lateral_score": 0.0,
+      "final_score": 0.8
+    },
+    {
+      "name": "kube-apiserver-k8s-attack-lab-control-plane",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-apiserver:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 2.0,
+      "lateral_score": 0.0,
+      "final_score": 0.8
+    },
+    {
+      "name": "kube-controller-manager-k8s-attack-lab-control-plane",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-controller-manager:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 2.0,
+      "lateral_score": 0.0,
+      "final_score": 0.8
+    },
+    {
+      "name": "kube-scheduler-k8s-attack-lab-control-plane",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-scheduler:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 2.0,
+      "lateral_score": 0.0,
+      "final_score": 0.8
+    },
+    {
+      "name": "kindnet-djxzq",
+      "namespace": "kube-system",
+      "image": "docker.io/kindest/kindnetd:v20251212-v0.29.0-alpha-105-g20ccfc88",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kindnet-g7kck",
+      "namespace": "kube-system",
+      "image": "docker.io/kindest/kindnetd:v20251212-v0.29.0-alpha-105-g20ccfc88",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kindnet-k8ttk",
+      "namespace": "kube-system",
+      "image": "docker.io/kindest/kindnetd:v20251212-v0.29.0-alpha-105-g20ccfc88",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kindnet-k9ptk",
+      "namespace": "kube-system",
+      "image": "docker.io/kindest/kindnetd:v20251212-v0.29.0-alpha-105-g20ccfc88",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kube-proxy-557kr",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-proxy:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kube-proxy-6jcck",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-proxy:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kube-proxy-7bvpl",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-proxy:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    },
+    {
+      "name": "kube-proxy-wghnw",
+      "namespace": "kube-system",
+      "image": "registry.k8s.io/kube-proxy:v1.35.0",
+      "cves": [],
+      "cve_score": 0.0,
+      "exposure_score": 1.0,
+      "privilege_score": 0.0,
+      "lateral_score": 0.0,
+      "final_score": 0.2
+    }
+  ]
+}

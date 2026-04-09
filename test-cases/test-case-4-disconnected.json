@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "cluster": "test-disconnected",
+    "generated": "2026-04-05",
+    "node_count": 6,
+    "edge_count": 4,
+    "pre_planted_paths": 0,
+    "description": "Test Case 4: Disconnected graph — two isolated components {A→B→C} and {D→E→F}. Source A cannot reach sink F. Dijkstra should return None. BFS from A should only find B,C."
+  },
+  "nodes": [
+    {"id": "A", "type": "ExternalActor", "name": "attacker-1",  "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",           "name": "isolated-pod", "namespace": "ns-1",     "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "Secret",        "name": "local-secret", "namespace": "ns-1",     "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "User",          "name": "attacker-2",   "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "E", "type": "Pod",           "name": "other-pod",    "namespace": "ns-2",     "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "F", "type": "Database",      "name": "prod-db",      "namespace": "data",     "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "reaches",          "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "C", "relationship": "can-read",         "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "E", "relationship": "can-exec",         "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "E", "target": "F", "relationship": "grants-access-to", "weight": 5.0, "cve": null, "cvss": null}
+  ]
+}

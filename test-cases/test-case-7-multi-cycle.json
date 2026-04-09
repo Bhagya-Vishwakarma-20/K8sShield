@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "cluster": "test-multi-cycle",
+    "generated": "2026-04-05",
+    "node_count": 6,
+    "edge_count": 9,
+    "pre_planted_paths": 1,
+    "description": "Test Case 7: Multiple overlapping cycles — B↔C (mutual), C→D→E→C (triangle), plus entry/exit. Tests DFS multi-cycle detection and deduplication."
+  },
+  "nodes": [
+    {"id": "A", "type": "ExternalActor", "name": "attacker",     "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",           "name": "entry-pod",    "namespace": "default",  "risk_score": 6.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "ServiceAccount","name": "cycle-sa",     "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "Role",          "name": "cycle-role",   "namespace": "default",  "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "E", "type": "ClusterRole",   "name": "cycle-cr",     "namespace": "cluster",  "risk_score": 8.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "F", "type": "Secret",        "name": "target-secret","namespace": "default",  "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"comment": "=== Entry ==="},
+    {"source": "A", "target": "B", "relationship": "reaches",   "weight": 2.0, "cve": null, "cvss": null},
+
+    {"comment": "=== Cycle 1: B↔C (mutual) ==="},
+    {"source": "B", "target": "C", "relationship": "uses",       "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "C", "target": "B", "relationship": "escalates",  "weight": 3.0, "cve": null, "cvss": null},
+
+    {"comment": "=== Cycle 2: C→D→E→C (triangle) ==="},
+    {"source": "C", "target": "D", "relationship": "bound-to",   "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "E", "relationship": "bound-to",   "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "E", "target": "C", "relationship": "escalates",  "weight": 1.0, "cve": null, "cvss": null},
+
+    {"comment": "=== Exit ==="},
+    {"source": "E", "target": "F", "relationship": "can-read",   "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "F", "relationship": "can-read",   "weight": 6.0, "cve": null, "cvss": null}
+  ]
+}

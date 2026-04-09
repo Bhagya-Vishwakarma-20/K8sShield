@@ -1,0 +1,447 @@
+{
+  "metadata": {
+    "cluster": "kind-kind",
+    "generated": "2026-04-09",
+    "node_count": 26,
+    "edge_count": 21,
+    "description": "Auto-generated cluster graph from live Kubernetes data"
+  },
+  "nodes": [
+    {
+      "id": "ns-default",
+      "type": "Namespace",
+      "name": "default",
+      "namespace": "cluster",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "node-kind-control-plane",
+      "type": "Node",
+      "name": "kind-control-plane",
+      "namespace": "cluster",
+      "risk_score": 9.0,
+      "is_source": false,
+      "is_sink": true,
+      "cves": []
+    },
+    {
+      "id": "node-kind-worker",
+      "type": "Node",
+      "name": "kind-worker",
+      "namespace": "cluster",
+      "risk_score": 9.0,
+      "is_source": false,
+      "is_sink": true,
+      "cves": []
+    },
+    {
+      "id": "pod-abcd",
+      "type": "Pod",
+      "name": "abcd",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-backend-7f5d966cb-s7c2f",
+      "type": "Pod",
+      "name": "backend-7f5d966cb-s7c2f",
+      "namespace": "default",
+      "risk_score": 6.5,
+      "is_source": false,
+      "is_sink": false,
+      "cves": [
+        "CVE-2023-41053",
+        "CVE-2023-45145",
+        "CVE-2023-41056",
+        "CVE-2024-31227",
+        "CVE-2024-31228"
+      ]
+    },
+    {
+      "id": "pod-db",
+      "type": "Pod",
+      "name": "db",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-final-test",
+      "type": "Pod",
+      "name": "final-test",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-final-train",
+      "type": "Pod",
+      "name": "final-train",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-frontend-68457cd5d9-9d24b",
+      "type": "Pod",
+      "name": "frontend-68457cd5d9-9d24b",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-imp-db",
+      "type": "Pod",
+      "name": "imp-db",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-imp-db-2",
+      "type": "Pod",
+      "name": "imp-db-2",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-kname",
+      "type": "Pod",
+      "name": "kname",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-myimage1",
+      "type": "Pod",
+      "name": "myimage1",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-myimage2",
+      "type": "Pod",
+      "name": "myimage2",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-myimage3",
+      "type": "Pod",
+      "name": "myimage3",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-new-pod",
+      "type": "Pod",
+      "name": "new-pod",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-unique-pod",
+      "type": "Pod",
+      "name": "unique-pod",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-unique-pod-2",
+      "type": "Pod",
+      "name": "unique-pod-2",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "pod-zpx",
+      "type": "Pod",
+      "name": "zpx",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "svc-backend-svc",
+      "type": "Service",
+      "name": "backend-svc",
+      "namespace": "default",
+      "risk_score": 6.5,
+      "is_source": true,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "svc-frontend-svc",
+      "type": "Service",
+      "name": "frontend-svc",
+      "namespace": "default",
+      "risk_score": 6.5,
+      "is_source": true,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "svc-kubernetes",
+      "type": "Service",
+      "name": "kubernetes",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "deploy-backend",
+      "type": "Deployment",
+      "name": "backend",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "deploy-frontend",
+      "type": "Deployment",
+      "name": "frontend",
+      "namespace": "default",
+      "risk_score": 4.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "cm-frontend-config",
+      "type": "ConfigMap",
+      "name": "frontend-config",
+      "namespace": "default",
+      "risk_score": 3.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    },
+    {
+      "id": "role-pod-reader",
+      "type": "Role",
+      "name": "pod-reader",
+      "namespace": "default",
+      "risk_score": 5.0,
+      "is_source": false,
+      "is_sink": false,
+      "cves": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "pod-frontend-68457cd5d9-9d24b",
+      "target": "cm-frontend-config",
+      "relationship": "reads",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-abcd",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-backend-7f5d966cb-s7c2f",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": "CVE-2023-41056",
+      "cvss": 8.1
+    },
+    {
+      "source": "pod-db",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-final-test",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-final-train",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-frontend-68457cd5d9-9d24b",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-imp-db",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-imp-db-2",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-kname",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-myimage1",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-myimage2",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-myimage3",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-new-pod",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-unique-pod",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-unique-pod-2",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "pod-zpx",
+      "target": "node-kind-worker",
+      "relationship": "scheduled-on",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "svc-backend-svc",
+      "target": "pod-backend-7f5d966cb-s7c2f",
+      "relationship": "routes-to",
+      "weight": 3.0,
+      "cve": "CVE-2023-41056",
+      "cvss": 8.1
+    },
+    {
+      "source": "svc-frontend-svc",
+      "target": "pod-frontend-68457cd5d9-9d24b",
+      "relationship": "routes-to",
+      "weight": 3.0,
+      "cve": null,
+      "cvss": null
+    },
+    {
+      "source": "deploy-backend",
+      "target": "pod-backend-7f5d966cb-s7c2f",
+      "relationship": "creates",
+      "weight": 2.0,
+      "cve": "CVE-2023-41056",
+      "cvss": 8.1
+    },
+    {
+      "source": "deploy-frontend",
+      "target": "pod-frontend-68457cd5d9-9d24b",
+      "relationship": "creates",
+      "weight": 2.0,
+      "cve": null,
+      "cvss": null
+    }
+  ]
+}

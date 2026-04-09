@@ -1,0 +1,604 @@
+{
+  "namespace": "local-path-storage",
+  "resources": {
+    "pods": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "generateName": "local-path-provisioner-67b8995b4b-",
+            "generation": 1,
+            "labels": {
+              "app": "local-path-provisioner",
+              "pod-template-hash": "67b8995b4b"
+            },
+            "name": "local-path-provisioner-67b8995b4b-92bfz",
+            "namespace": "local-path-storage",
+            "ownerReferences": [
+              {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "local-path-provisioner-67b8995b4b",
+                "uid": "a3a4f6e1-ad47-4022-b790-c7fc133315a5"
+              }
+            ],
+            "resourceVersion": "5360",
+            "uid": "c73868dd-63d7-4c40-be5f-ba0a28be8e6b"
+          },
+          "spec": {
+            "containers": [
+              {
+                "command": [
+                  "local-path-provisioner",
+                  "--debug",
+                  "start",
+                  "--helper-image",
+                  "docker.io/kindest/local-path-helper:v20251211-v0.29.0-alpha-100-g82a92c5d",
+                  "--config",
+                  "/etc/config/config.json"
+                ],
+                "env": [
+                  {
+                    "name": "POD_NAMESPACE",
+                    "valueFrom": {
+                      "fieldRef": {
+                        "apiVersion": "v1",
+                        "fieldPath": "metadata.namespace"
+                      }
+                    }
+                  },
+                  {
+                    "name": "CONFIG_MOUNT_PATH",
+                    "value": "/etc/config/"
+                  }
+                ],
+                "image": "docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "local-path-provisioner",
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/config/",
+                    "name": "config-volume"
+                  },
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-w59wc",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "enableServiceLinks": true,
+            "nodeName": "kind-control-plane",
+            "nodeSelector": {
+              "kubernetes.io/os": "linux"
+            },
+            "preemptionPolicy": "PreemptLowerPriority",
+            "priority": 0,
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {},
+            "serviceAccount": "local-path-provisioner-service-account",
+            "serviceAccountName": "local-path-provisioner-service-account",
+            "terminationGracePeriodSeconds": 30,
+            "tolerations": [
+              {
+                "effect": "NoSchedule",
+                "key": "node-role.kubernetes.io/control-plane",
+                "operator": "Equal"
+              },
+              {
+                "effect": "NoSchedule",
+                "key": "node-role.kubernetes.io/master",
+                "operator": "Equal"
+              },
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              },
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              }
+            ],
+            "volumes": [
+              {
+                "configMap": {
+                  "defaultMode": 420,
+                  "name": "local-path-config"
+                },
+                "name": "config-volume"
+              },
+              {
+                "name": "kube-api-access-w59wc",
+                "projected": {
+                  "defaultMode": 420,
+                  "sources": [
+                    {
+                      "serviceAccountToken": {
+                        "expirationSeconds": 3607,
+                        "path": "token"
+                      }
+                    },
+                    {
+                      "configMap": {
+                        "items": [
+                          {
+                            "key": "ca.crt",
+                            "path": "ca.crt"
+                          }
+                        ],
+                        "name": "kube-root-ca.crt"
+                      }
+                    },
+                    {
+                      "downwardAPI": {
+                        "items": [
+                          {
+                            "fieldRef": {
+                              "apiVersion": "v1",
+                              "fieldPath": "metadata.namespace"
+                            },
+                            "path": "namespace"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "status": {
+            "conditions": [
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-09T05:35:49Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodReadyToStartContainers"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:54:38Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Initialized"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-09T05:36:29Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-09T05:36:29Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "ContainersReady"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:54:38Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodScheduled"
+              }
+            ],
+            "containerStatuses": [
+              {
+                "containerID": "containerd://acad961c30a2a9bf3997a472ea70e1fa9a69e9b7dc45b6a9e9abbb81517b881c",
+                "image": "docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88",
+                "imageID": "sha256:65232e320e58be04174ff3748f9f317c23e505e33cf26d398feaea1c2584881c",
+                "lastState": {
+                  "terminated": {
+                    "containerID": "containerd://cbc37bb29078c22adf13b0553e79cc3df95ff1982b93c703772ee3c0a91174fc",
+                    "exitCode": 1,
+                    "finishedAt": "2026-04-09T05:36:18Z",
+                    "reason": "Error",
+                    "startedAt": "2026-04-09T05:35:48Z"
+                  }
+                },
+                "name": "local-path-provisioner",
+                "ready": true,
+                "resources": {},
+                "restartCount": 2,
+                "started": true,
+                "state": {
+                  "running": {
+                    "startedAt": "2026-04-09T05:36:29Z"
+                  }
+                },
+                "user": {
+                  "linux": {
+                    "gid": 0,
+                    "supplementalGroups": [
+                      0
+                    ],
+                    "uid": 0
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/config/",
+                    "name": "config-volume"
+                  },
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-w59wc",
+                    "readOnly": true,
+                    "recursiveReadOnly": "Disabled"
+                  }
+                ]
+              }
+            ],
+            "hostIP": "172.21.0.2",
+            "hostIPs": [
+              {
+                "ip": "172.21.0.2"
+              }
+            ],
+            "observedGeneration": 1,
+            "phase": "Running",
+            "podIP": "10.244.0.2",
+            "podIPs": [
+              {
+                "ip": "10.244.0.2"
+              }
+            ],
+            "qosClass": "BestEffort",
+            "startTime": "2026-04-08T19:54:38Z"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "services": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "deployments": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {
+              "deployment.kubernetes.io/revision": "1",
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"local-path-provisioner\",\"namespace\":\"local-path-storage\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"local-path-provisioner\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"local-path-provisioner\"}},\"spec\":{\"containers\":[{\"command\":[\"local-path-provisioner\",\"--debug\",\"start\",\"--helper-image\",\"docker.io/kindest/local-path-helper:v20251211-v0.29.0-alpha-100-g82a92c5d\",\"--config\",\"/etc/config/config.json\"],\"env\":[{\"name\":\"POD_NAMESPACE\",\"valueFrom\":{\"fieldRef\":{\"fieldPath\":\"metadata.namespace\"}}},{\"name\":\"CONFIG_MOUNT_PATH\",\"value\":\"/etc/config/\"}],\"image\":\"docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"local-path-provisioner\",\"volumeMounts\":[{\"mountPath\":\"/etc/config/\",\"name\":\"config-volume\"}]}],\"nodeSelector\":{\"kubernetes.io/os\":\"linux\"},\"serviceAccountName\":\"local-path-provisioner-service-account\",\"tolerations\":[{\"effect\":\"NoSchedule\",\"key\":\"node-role.kubernetes.io/control-plane\",\"operator\":\"Equal\"},{\"effect\":\"NoSchedule\",\"key\":\"node-role.kubernetes.io/master\",\"operator\":\"Equal\"}],\"volumes\":[{\"configMap\":{\"name\":\"local-path-config\"},\"name\":\"config-volume\"}]}}}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:54:20Z",
+            "generation": 1,
+            "name": "local-path-provisioner",
+            "namespace": "local-path-storage",
+            "resourceVersion": "5362",
+            "uid": "50cd6501-5892-46e5-8a62-ca27ad9ea68c"
+          },
+          "spec": {
+            "progressDeadlineSeconds": 600,
+            "replicas": 1,
+            "revisionHistoryLimit": 10,
+            "selector": {
+              "matchLabels": {
+                "app": "local-path-provisioner"
+              }
+            },
+            "strategy": {
+              "rollingUpdate": {
+                "maxSurge": "25%",
+                "maxUnavailable": "25%"
+              },
+              "type": "RollingUpdate"
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "local-path-provisioner"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "command": [
+                      "local-path-provisioner",
+                      "--debug",
+                      "start",
+                      "--helper-image",
+                      "docker.io/kindest/local-path-helper:v20251211-v0.29.0-alpha-100-g82a92c5d",
+                      "--config",
+                      "/etc/config/config.json"
+                    ],
+                    "env": [
+                      {
+                        "name": "POD_NAMESPACE",
+                        "valueFrom": {
+                          "fieldRef": {
+                            "apiVersion": "v1",
+                            "fieldPath": "metadata.namespace"
+                          }
+                        }
+                      },
+                      {
+                        "name": "CONFIG_MOUNT_PATH",
+                        "value": "/etc/config/"
+                      }
+                    ],
+                    "image": "docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88",
+                    "imagePullPolicy": "IfNotPresent",
+                    "name": "local-path-provisioner",
+                    "resources": {},
+                    "terminationMessagePath": "/dev/termination-log",
+                    "terminationMessagePolicy": "File",
+                    "volumeMounts": [
+                      {
+                        "mountPath": "/etc/config/",
+                        "name": "config-volume"
+                      }
+                    ]
+                  }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "nodeSelector": {
+                  "kubernetes.io/os": "linux"
+                },
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "local-path-provisioner-service-account",
+                "serviceAccountName": "local-path-provisioner-service-account",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                  {
+                    "effect": "NoSchedule",
+                    "key": "node-role.kubernetes.io/control-plane",
+                    "operator": "Equal"
+                  },
+                  {
+                    "effect": "NoSchedule",
+                    "key": "node-role.kubernetes.io/master",
+                    "operator": "Equal"
+                  }
+                ],
+                "volumes": [
+                  {
+                    "configMap": {
+                      "defaultMode": 420,
+                      "name": "local-path-config"
+                    },
+                    "name": "config-volume"
+                  }
+                ]
+              }
+            }
+          },
+          "status": {
+            "availableReplicas": 1,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-04-08T19:54:25Z",
+                "lastUpdateTime": "2026-04-08T19:54:41Z",
+                "message": "ReplicaSet \"local-path-provisioner-67b8995b4b\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+              },
+              {
+                "lastTransitionTime": "2026-04-09T05:36:29Z",
+                "lastUpdateTime": "2026-04-09T05:36:29Z",
+                "message": "Deployment has minimum availability.",
+                "reason": "MinimumReplicasAvailable",
+                "status": "True",
+                "type": "Available"
+              }
+            ],
+            "observedGeneration": 1,
+            "readyReplicas": 1,
+            "replicas": 1,
+            "terminatingReplicas": 0,
+            "updatedReplicas": 1
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "roles": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "Role",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"Role\",\"metadata\":{\"annotations\":{},\"name\":\"local-path-provisioner-role\",\"namespace\":\"local-path-storage\"},\"rules\":[{\"apiGroups\":[\"\"],\"resources\":[\"pods\"],\"verbs\":[\"get\",\"list\",\"watch\",\"create\",\"patch\",\"update\",\"delete\"]}]}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:54:20Z",
+            "name": "local-path-provisioner-role",
+            "namespace": "local-path-storage",
+            "resourceVersion": "281",
+            "uid": "743fa93d-240d-498b-a2a7-35f02718ba3e"
+          },
+          "rules": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "pods"
+              ],
+              "verbs": [
+                "get",
+                "list",
+                "watch",
+                "create",
+                "patch",
+                "update",
+                "delete"
+              ]
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "rolebindings": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "RoleBinding",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"RoleBinding\",\"metadata\":{\"annotations\":{},\"name\":\"local-path-provisioner-bind\",\"namespace\":\"local-path-storage\"},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"Role\",\"name\":\"local-path-provisioner-role\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"local-path-provisioner-service-account\",\"namespace\":\"local-path-storage\"}]}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:54:20Z",
+            "name": "local-path-provisioner-bind",
+            "namespace": "local-path-storage",
+            "resourceVersion": "283",
+            "uid": "7de14562-b953-4b37-8d3f-a43a228e5c1c"
+          },
+          "roleRef": {
+            "apiGroup": "rbac.authorization.k8s.io",
+            "kind": "Role",
+            "name": "local-path-provisioner-role"
+          },
+          "subjects": [
+            {
+              "kind": "ServiceAccount",
+              "name": "local-path-provisioner-service-account",
+              "namespace": "local-path-storage"
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "serviceaccounts": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "default",
+            "namespace": "local-path-storage",
+            "resourceVersion": "324",
+            "uid": "25666fd1-894d-485b-baa1-5a26946fafd8"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"annotations\":{},\"name\":\"local-path-provisioner-service-account\",\"namespace\":\"local-path-storage\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:54:20Z",
+            "name": "local-path-provisioner-service-account",
+            "namespace": "local-path-storage",
+            "resourceVersion": "280",
+            "uid": "8c6a101b-9d62-4328-b71a-d2632631fb55"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "secrets": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "configmaps": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIdorMFBSxCMEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA0MDgxOTQ5MDlaFw0zNjA0MDUxOTU0MDlaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQCd6JaaE1SQcZCtqd2yroyYW52i6DDtVni1oCXk8XNm3IKzDYyLVN3WphZW\n27kraV+o9xwL5aHz1FK2jzL5BXaJ5xqWFPtyDeRQt1YoKGd7K3wsT1flvc4A/FLB\nIAGjaPePlDl+E3bm7rwWze1N6neZb/r9IbgFYJWsmh0M2tPlCd6e6uGTAsxS22lZ\ntAxlVrubRES1GP/U34NTIgtpvOSF3qpnPH9m1xgNhRg4VCZrEkyeIO59n+CjSiqW\nB5YGmDVzQh2lLd5NKMclbYAefz8yegnpkk4FlSfC2sumWyFITJvXuJu/ZIVOaG1J\nnSfLIiO+ZKlgEvFnj5NvZr9A49XtAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTraqz6HPtDqNSt5clxpNMcgPQfhjAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQBNak/ruB+q\n/FIor8KxclOhfPsUDaSsUywSzOjzlYpltXj83+fWFCNj7Ui//XF7rTL0T9bPlTFk\nDmL8KX5901oImMHzawLg338xaSNGO0s6+ts+Cfut1N5NPfVyFHd5pD8NrQI6SMx1\n48Pd9Vdxy0H3JtYPD1eZrvLGlPka4+chMjVISFmYp5abhROcy6SlfNwMSQ5VNuWu\n7Ho0mNsdwaoASxKNh776qg8irmHaUosUP3KSF+UG7jaFmZJ4698G4YbBosXtOQ87\n/Zg8a4uSj0byp6Xvwn6uNNR/xx10RbfuQE4irP8pHeiP2qu/4RwXQw5tMTl+4IrB\nDK0DAP4+REcx\n-----END CERTIFICATE-----\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+            },
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "kube-root-ca.crt",
+            "namespace": "local-path-storage",
+            "resourceVersion": "332",
+            "uid": "b1089247-7c92-48d3-802c-14ab8cc64455"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "data": {
+            "config.json": "{\n        \"nodePathMap\":[\n        {\n                \"node\":\"DEFAULT_PATH_FOR_NON_LISTED_NODES\",\n                \"paths\":[\"/var/local-path-provisioner\"]\n        }\n        ]\n}",
+            "helperPod.yaml": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: helper-pod\nspec:\n  priorityClassName: system-node-critical\n  tolerations:\n    - key: node.kubernetes.io/disk-pressure\n      operator: Exists\n      effect: NoSchedule\n  containers:\n  - name: helper-pod\n    image: docker.io/kindest/local-path-helper:v20251211-v0.29.0-alpha-100-g82a92c5d\n    imagePullPolicy: IfNotPresent",
+            "setup": "#!/bin/sh\nset -eu\nmkdir -m 0777 -p \"$VOL_DIR\"",
+            "teardown": "#!/bin/sh\nset -eu\nrm -rf \"$VOL_DIR\""
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"config.json\":\"{\\n        \\\"nodePathMap\\\":[\\n        {\\n                \\\"node\\\":\\\"DEFAULT_PATH_FOR_NON_LISTED_NODES\\\",\\n                \\\"paths\\\":[\\\"/var/local-path-provisioner\\\"]\\n        }\\n        ]\\n}\",\"helperPod.yaml\":\"apiVersion: v1\\nkind: Pod\\nmetadata:\\n  name: helper-pod\\nspec:\\n  priorityClassName: system-node-critical\\n  tolerations:\\n    - key: node.kubernetes.io/disk-pressure\\n      operator: Exists\\n      effect: NoSchedule\\n  containers:\\n  - name: helper-pod\\n    image: docker.io/kindest/local-path-helper:v20251211-v0.29.0-alpha-100-g82a92c5d\\n    imagePullPolicy: IfNotPresent\",\"setup\":\"#!/bin/sh\\nset -eu\\nmkdir -m 0777 -p \\\"$VOL_DIR\\\"\",\"teardown\":\"#!/bin/sh\\nset -eu\\nrm -rf \\\"$VOL_DIR\\\"\"},\"kind\":\"ConfigMap\",\"metadata\":{\"annotations\":{},\"name\":\"local-path-config\",\"namespace\":\"local-path-storage\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:54:20Z",
+            "name": "local-path-config",
+            "namespace": "local-path-storage",
+            "resourceVersion": "287",
+            "uid": "d68f6899-88b9-4596-b2f5-eb0b8507e4b9"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "networkpolicies": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    }
+  }
+}

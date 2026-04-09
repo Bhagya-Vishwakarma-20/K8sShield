@@ -1,0 +1,188 @@
+# FRONTEND POD — public-facing, source node for attack path 1
+# Uses sa-frontend which has cross-namespace secret access
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-web
+  namespace: frontend
+  labels:
+    app: frontend-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-web
+  template:
+    metadata:
+      labels:
+        app: frontend-web
+    spec:
+      serviceAccountName: sa-frontend   # binds this pod to the risky SA
+      containers:
+        - name: frontend
+          image: nginx:1.21             # old nginx — has known CVEs, matches mock cve label
+          ports:
+            - containerPort: 80
+
+---
+# BACKEND POD — internal, source node for attack path 2
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: backend
+  labels:
+    app: backend-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      serviceAccountName: sa-backend
+      containers:
+        - name: backend
+          image: node:16-alpine         # old node — has CVEs
+          ports:
+            - containerPort: 8080
+          command: ["sh", "-c", "while true; do sleep 3600; done"]  # dummy process
+
+---
+# WEBAPP POD — attack path 3 origin
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  namespace: backend
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      serviceAccountName: sa-webapp
+      containers:
+        - name: webapp
+          image: node:latest-slim
+          ports:
+            - containerPort: 5000
+          command: ["sh", "-c", "while true; do sleep 3600; done"]
+
+---
+# MONITORING POD — attack path 4 origin
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-agent
+  namespace: monitoring
+  labels:
+    app: monitor-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor-agent
+  template:
+    metadata:
+      labels:
+        app: monitor-agent
+    spec:
+      serviceAccountName: sa-monitor
+      containers:
+        - name: monitor
+          image: prom/prometheus:v2.37.0    # older version, has CVEs
+          ports:
+            - containerPort: 9090
+
+---
+# PRODUCTION DB — crown jewel SINK NODE (not actually a real DB, just represents it)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-db
+  namespace: data
+  labels:
+    app: production-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: production-db
+  template:
+    metadata:
+      labels:
+        app: production-db
+    spec:
+      serviceAccountName: sa-db-job
+      containers:
+        - name: postgres
+          image: postgres:13        # older version
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-db-credentials
+                  key: password
+
+---
+# CYCLE TEST PODS
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a
+  namespace: security-test
+  labels:
+    app: service-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      labels:
+        app: service-a
+    spec:
+      serviceAccountName: sa-service-a
+      containers:
+        - name: service-a
+          image: nginx
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-b
+  namespace: security-test
+  labels:
+    app: service-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-b
+  template:
+    metadata:
+      labels:
+        app: service-b
+    spec:
+      serviceAccountName: sa-service-b
+      containers:
+        - name: service-b
+          image: nginx
+          ports:
+            - containerPort: 80

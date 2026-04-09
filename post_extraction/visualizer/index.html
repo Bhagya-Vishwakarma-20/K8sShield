@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>K8s | Visualizer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space_Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#080a0f",
+                      "surface": "#0f1219",
+                      "primary": "#4facfe",
+                      "error": "#ff4b4b",
+                      "warning": "#f5a623",
+                      "success": "#10b981",
+                      "on-surface": "#e2e8f0"
+              },
+              "fontFamily": {
+                  "inter": ["Inter", "sans-serif"],
+                  "headline": ["Space Grotesk", "sans-serif"],
+                  "mono": ["JetBrains Mono", "monospace"]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex flex-col h-screen overflow-hidden selection:bg-primary/30 text-on-surface bg-background font-inter antialiased">
+    
+    <!-- Ultra minimalist navbar (Glassmorphism) -->
+    <header id="app-header" class="flex justify-between items-center w-full px-6 h-14 bg-surface/30 backdrop-blur-xl z-50 border-b border-white/5 relative">
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div id="logo-icon" class="w-6 h-6 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-[20px]">account_tree</span>
+                </div>
+                <h1 id="app-title" class="text-lg font-medium tracking-wide text-white">K8s</h1>
+            </div>
+            <div class="w-px h-4 bg-white/10"></div>
+            <div id="status-indicator" class="flex items-center gap-2">
+                <span id="status-dot" class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#4facfe]"></span>
+                <p id="status-text" class="text-[10px] font-mono uppercase tracking-[0.15em] text-primary/80">Live</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-8 text-[10px] font-mono text-white/40 uppercase tracking-widest">
+            <div class="flex items-center gap-2">
+                <span>Nodes</span>
+                <span id="node-count" class="text-white font-medium text-xs">—</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span>Edges</span>
+                <span id="edge-count" class="text-white font-medium text-xs">—</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span>Attacks</span>
+                <span id="path-count" class="text-error font-medium text-xs">—</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span>Cycles</span>
+                <span id="cycle-count" class="text-warning font-medium text-xs">—</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-main" class="flex flex-1 relative overflow-hidden z-10 w-full h-full">
+        <!-- Sleek sidebar (Scaled Up) -->
+        <aside id="sidebar" class="flex flex-col h-full w-[320px] bg-surface/40 backdrop-blur-lg border-r border-white/5 py-4 px-5 z-40 overflow-y-auto custom-scrollbar">
+            
+            <!-- Controls -->
+            <section id="panel-controls" class="mb-6">
+                <h2 class="text-[9px] font-mono text-white/30 uppercase tracking-[0.15em] mb-3">Display Settings</h2>
+                <div class="space-y-1">
+                    <label class="flex justify-between items-center py-1.5 cursor-pointer group">
+                        <span class="text-[11px] font-medium text-white/60 group-hover:text-white transition-colors">Attack Paths</span>
+                        <input type="checkbox" id="toggle-paths" class="custom-toggle" checked>
+                    </label>
+                    <label class="flex justify-between items-center py-1.5 cursor-pointer group">
+                        <span class="text-[11px] font-medium text-white/60 group-hover:text-white transition-colors">Cycles</span>
+                        <input type="checkbox" id="toggle-cycles" class="custom-toggle" checked>
+                    </label>
+                    <label class="flex justify-between items-center py-1.5 cursor-pointer group">
+                        <span class="text-[11px] font-medium text-white/60 group-hover:text-white transition-colors">Node Labels</span>
+                        <input type="checkbox" id="toggle-labels" class="custom-toggle" checked>
+                    </label>
+                    <label class="flex justify-between items-center py-1.5 cursor-pointer group">
+                        <span class="text-[11px] font-medium text-white/60 group-hover:text-white transition-colors">Critical Nodes</span>
+                        <input type="checkbox" id="toggle-critical" class="custom-toggle" checked>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Paths -->
+            <section id="panel-paths" class="flex-1 flex flex-col min-h-0 mb-4">
+                <h2 class="text-[9px] font-mono text-error/60 uppercase tracking-[0.15em] mb-2">Threat Vectors</h2>
+                <div id="paths-list" class="flex-1 overflow-y-auto custom-scrollbar -mx-2 px-2 space-y-2">
+                    <div id="paths-empty" class="py-8 flex flex-col items-center justify-center text-center opacity-40">
+                        <span class="material-symbols-outlined text-[20px] mb-1">radar</span>
+                        <p class="text-[9px] uppercase tracking-widest font-mono">No Active Vectors</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Legend -->
+            <section id="panel-legend" class="mt-auto pt-4 border-t border-white/5">
+                <h2 class="text-[9px] font-mono text-white/30 uppercase tracking-[0.15em] mb-3">Resource Legend</h2>
+                <div class="grid grid-cols-2 gap-y-2 gap-x-1 text-[10px] font-medium text-white/50 relative">
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>Pod</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>SvcAccount</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>Role</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>Secret</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-600 border border-white/20"></span>Database</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Service</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>RoleBind</div>
+                    <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-violet-500"></span>ClusterRole</div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Main Graph Area -->
+        <section id="graph-container" class="flex-1 relative overflow-hidden bg-background">
+            
+            <!-- SVG Canvas -->
+            <svg id="graph-svg" class="absolute inset-0 w-full h-full z-10"></svg>
+            
+            <!-- Extremely subtle dot grid -->
+            <div class="absolute inset-0 opacity-[0.05] pointer-events-none z-0" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" class="absolute inset-0 bg-background/80 backdrop-blur-sm flex flex-col items-center justify-center z-50 transition-opacity">
+                <div class="w-8 h-8 border-[2px] border-white/10 border-t-primary rounded-full animate-spin"></div>
+                <p class="mt-4 text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase">Rendering Map</p>
+            </div>
+
+            <!-- Clean Detail Panel Overlay -->
+            <aside id="detail-panel" class="absolute right-0 top-0 bottom-[80px] w-[320px] bg-surface/80 backdrop-blur-xl border-l border-white/5 p-5 z-40 transform translate-x-full transition-transform duration-300 custom-scrollbar overflow-y-auto hidden">
+                <button id="btn-close-detail" class="absolute top-4 right-4 w-6 h-6 flex items-center justify-center text-white/40 hover:text-white transition-colors bg-white/5 rounded">
+                    <span class="material-symbols-outlined text-[14px]">close</span>
+                </button>
+                <div class="mb-5 pr-6">
+                    <p class="text-[9px] font-mono text-primary/60 uppercase tracking-widest mb-1">Node Details</p>
+                    <h2 id="detail-title" class="text-sm font-semibold text-white break-words leading-tight"></h2>
+                </div>
+                <!-- detail content injected via template -->
+                <div id="detail-content" class="space-y-4"></div>
+            </aside>
+
+            <!-- Minimal Tooltip -->
+            <div id="tooltip" class="absolute bg-surface/95 border border-white/10 backdrop-blur-md rounded-lg shadow-xl z-50 pointer-events-none hidden min-w-[200px] max-w-[240px] transition-opacity duration-200">
+                <div class="px-3 py-2 border-b border-white/5 bg-white/[0.02]">
+                    <div id="tooltip-name" class="font-medium text-[11px] text-white truncate break-words"></div>
+                </div>
+                <div class="p-3 py-2 space-y-1.5 text-[10px] font-mono">
+                    <div class="flex justify-between items-center gap-3"><span class="text-white/40">Type</span><span id="tooltip-type" class="text-white/90"></span></div>
+                    <div class="flex justify-between items-center gap-3"><span class="text-white/40">Namespace</span><span id="tooltip-namespace" class="text-white/80 truncate"></span></div>
+                    <div class="flex justify-between items-center gap-3"><span class="text-white/40">Risk</span><span id="tooltip-risk" class="text-error font-semibold"></span></div>
+                    <div class="flex justify-between items-start gap-3"><span class="text-white/40">CVEs</span><span id="tooltip-cves" class="text-white/80 text-right"></span></div>
+                    <div class="flex justify-between items-center gap-3"><span class="text-white/40">Role</span><span id="tooltip-role" class="text-primary/90"></span></div>
+                </div>
+            </div>
+
+            <!-- Global Timeline Tooltip -->
+            <div id="global-timeline-tooltip" class="absolute bg-surface/95 border border-white/10 backdrop-blur-md rounded shadow-xl z-[10000] pointer-events-none hidden p-2 px-3 transform -translate-x-1/2 -translate-y-full transition-opacity"></div>
+
+            <!-- Context Info -->
+            <div class="absolute left-6 top-6 z-30 pointer-events-none">
+                <div id="graph-watermark" class="flex items-center gap-2">
+                    <span class="w-[6px] h-[6px] rounded-full bg-primary animate-pulse" id="watermark-dot"></span>
+                    <span id="watermark-text" class="text-[9px] font-mono tracking-widest uppercase text-white/40">Live View</span>
+                </div>
+            </div>
+
+            <!-- Simple, smaller zoom controls -->
+            <div class="absolute right-4 top-4 z-30">
+                <div class="flex flex-col bg-surface/80 backdrop-blur-md rounded-md border border-white/10 overflow-hidden shadow-sm">
+                    <button id="btn-zoom-in" class="p-1.5 text-white/50 hover:text-white hover:bg-white/5 transition-colors" title="Zoom In">
+                        <span class="material-symbols-outlined text-[16px] block">add</span>
+                    </button>
+                    <div class="w-full h-px bg-white/5"></div>
+                    <button id="btn-zoom-reset" class="p-1.5 text-white/50 hover:text-white hover:bg-white/5 transition-colors" title="Reset View">
+                        <span class="material-symbols-outlined text-[16px] block">center_focus_weak</span>
+                    </button>
+                    <div class="w-full h-px bg-white/5"></div>
+                    <button id="btn-zoom-out" class="p-1.5 text-white/50 hover:text-white hover:bg-white/5 transition-colors" title="Zoom Out">
+                        <span class="material-symbols-outlined text-[16px] block">remove</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sleek flat timeline at the bottom (Scaled Up) -->
+            <section id="panel-timeline" class="absolute bottom-0 left-0 right-0 h-[80px] bg-surface/60 backdrop-blur-md border-t border-white/5 z-50 flex">
+                <!-- Info Section -->
+                <div class="w-[200px] border-r border-white/5 flex flex-col justify-center px-4 shrink-0">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[12px] text-white/40">linear_scale</span>
+                        <h2 class="text-[10px] font-mono text-white/70 uppercase">Timeline</h2>
+                    </div>
+                    <div class="text-[9px] font-mono text-white/30 mt-0.5">
+                        <span id="snapshot-count-badge" class="font-bold text-white/50">0</span> Entries
+                    </div>
+                </div>
+
+                <!-- Track Section -->
+                <div id="timeline-container" class="flex-1 h-full overflow-x-auto overflow-y-hidden custom-scrollbar relative">
+                    <!-- Central horizontal line guide -->
+                    <div class="absolute left-0 right-0 top-1/2 h-px bg-white/5 -translate-y-1/2 pointer-events-none z-0"></div>
+                    
+                    <div id="timeline-track" class="flex items-center px-6 gap-0 h-full w-[max-content] cursor-grab active:cursor-grabbing relative z-10">
+                        <!-- Markers injected by JS -->
+                    </div>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

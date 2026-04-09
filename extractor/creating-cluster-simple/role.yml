@@ -1,0 +1,10 @@
+# Role: can read secrets in data namespace — the KEY misconfiguration
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: role-secret-reader
+  namespace: data
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]

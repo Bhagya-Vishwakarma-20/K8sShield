@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "cluster": "test-deep-bfs",
+    "generated": "2026-04-05",
+    "node_count": 8,
+    "edge_count": 9,
+    "pre_planted_paths": 1,
+    "description": "Test Case 8: Deep chain with branching — tests BFS depth limiting. A→B→C→D→E→F→G→H with a branch B→D. Tests max_depth=3 and max_depth=5 BFS behavior."
+  },
+  "nodes": [
+    {"id": "A", "type": "ExternalActor", "name": "attacker",   "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Service",       "name": "lb-svc",     "namespace": "default",  "risk_score": 6.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "Pod",           "name": "api-pod",    "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "ServiceAccount","name": "sa-api",     "namespace": "default",  "risk_score": 4.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "E", "type": "Role",          "name": "exec-role",  "namespace": "default",  "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "F", "type": "ClusterRole",   "name": "admin-cr",   "namespace": "cluster",  "risk_score": 9.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "G", "type": "Secret",        "name": "admin-token","namespace": "kube-system","risk_score": 10.0,"is_source": false, "is_sink": false, "cves": []},
+    {"id": "H", "type": "Namespace",     "name": "kube-system","namespace": "cluster",  "risk_score": 9.0,  "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "reaches",          "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "C", "relationship": "routes-to",        "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "D", "relationship": "routes-to",        "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "C", "target": "D", "relationship": "uses",             "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "D", "target": "E", "relationship": "bound-to",         "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "E", "target": "F", "relationship": "bound-to",         "weight": 4.0, "cve": null, "cvss": null},
+    {"source": "F", "target": "G", "relationship": "can-read",         "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "G", "target": "H", "relationship": "grants-access-to", "weight": 6.0, "cve": null, "cvss": null},
+    {"source": "C", "target": "E", "relationship": "bound-to",         "weight": 10.0,"cve": null, "cvss": null}
+  ]
+}

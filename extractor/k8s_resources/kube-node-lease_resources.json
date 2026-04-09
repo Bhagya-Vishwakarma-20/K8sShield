@@ -1,0 +1,107 @@
+{
+  "namespace": "kube-node-lease",
+  "resources": {
+    "pods": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "services": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "deployments": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "roles": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "rolebindings": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "serviceaccounts": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "default",
+            "namespace": "kube-node-lease",
+            "resourceVersion": "321",
+            "uid": "f540af0c-fa6f-4411-a2e5-79e4b2028b6c"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "secrets": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "configmaps": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIdorMFBSxCMEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA0MDgxOTQ5MDlaFw0zNjA0MDUxOTU0MDlaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQCd6JaaE1SQcZCtqd2yroyYW52i6DDtVni1oCXk8XNm3IKzDYyLVN3WphZW\n27kraV+o9xwL5aHz1FK2jzL5BXaJ5xqWFPtyDeRQt1YoKGd7K3wsT1flvc4A/FLB\nIAGjaPePlDl+E3bm7rwWze1N6neZb/r9IbgFYJWsmh0M2tPlCd6e6uGTAsxS22lZ\ntAxlVrubRES1GP/U34NTIgtpvOSF3qpnPH9m1xgNhRg4VCZrEkyeIO59n+CjSiqW\nB5YGmDVzQh2lLd5NKMclbYAefz8yegnpkk4FlSfC2sumWyFITJvXuJu/ZIVOaG1J\nnSfLIiO+ZKlgEvFnj5NvZr9A49XtAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTraqz6HPtDqNSt5clxpNMcgPQfhjAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQBNak/ruB+q\n/FIor8KxclOhfPsUDaSsUywSzOjzlYpltXj83+fWFCNj7Ui//XF7rTL0T9bPlTFk\nDmL8KX5901oImMHzawLg338xaSNGO0s6+ts+Cfut1N5NPfVyFHd5pD8NrQI6SMx1\n48Pd9Vdxy0H3JtYPD1eZrvLGlPka4+chMjVISFmYp5abhROcy6SlfNwMSQ5VNuWu\n7Ho0mNsdwaoASxKNh776qg8irmHaUosUP3KSF+UG7jaFmZJ4698G4YbBosXtOQ87\n/Zg8a4uSj0byp6Xvwn6uNNR/xx10RbfuQE4irP8pHeiP2qu/4RwXQw5tMTl+4IrB\nDK0DAP4+REcx\n-----END CERTIFICATE-----\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+            },
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "kube-root-ca.crt",
+            "namespace": "kube-node-lease",
+            "resourceVersion": "329",
+            "uid": "18db02c3-5583-415b-bcef-991c0cb74b81"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "networkpolicies": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    }
+  }
+}

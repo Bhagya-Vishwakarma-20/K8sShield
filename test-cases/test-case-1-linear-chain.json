@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "cluster": "test-linear-chain",
+    "generated": "2026-04-05",
+    "node_count": 5,
+    "edge_count": 4,
+    "pre_planted_paths": 1,
+    "description": "Test Case 1: Simple linear chain — A→B→C→D→E. Tests basic Dijkstra shortest path, BFS layer ordering, and DFS (no cycles expected)."
+  },
+  "nodes": [
+    {"id": "A", "type": "ExternalActor", "name": "attacker",       "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",            "name": "web-server",     "namespace": "default",  "risk_score": 6.0,  "is_source": false, "is_sink": false, "cves": ["CVE-2024-0001"]},
+    {"id": "C", "type": "ServiceAccount", "name": "sa-web",         "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "Role",           "name": "secret-reader",  "namespace": "default",  "risk_score": 7.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "E", "type": "Secret",         "name": "db-password",    "namespace": "default",  "risk_score": 9.0,  "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "reaches",    "weight": 3.0, "cve": "CVE-2024-0001", "cvss": 7.5},
+    {"source": "B", "target": "C", "relationship": "uses",       "weight": 2.0, "cve": null,            "cvss": null},
+    {"source": "C", "target": "D", "relationship": "bound-to",   "weight": 4.0, "cve": null,            "cvss": null},
+    {"source": "D", "target": "E", "relationship": "can-read",   "weight": 5.0, "cve": null,            "cvss": null}
+  ]
+}

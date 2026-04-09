@@ -1,0 +1,84 @@
+# Frontend service — LoadBalancer type marks it as internet-facing source node
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: frontend
+  labels: {}
+spec:
+  selector:
+    app: frontend-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer              # ingestion script: LoadBalancer = public source node
+
+---
+# Backend service — internal
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+  namespace: backend
+  labels:
+    exposure: internal
+spec:
+  selector:
+    app: backend-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+
+---
+# Webapp service
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+  namespace: backend
+  labels:
+    exposure: internal
+spec:
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP
+
+---
+# Postgres service — crown jewel target
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+  namespace: data
+  labels: {}
+spec:
+  selector:
+    app: production-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+
+---
+# Monitoring service
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor-svc
+  namespace: monitoring
+spec:
+  selector:
+    app: monitor-agent
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP

@@ -1,0 +1,56 @@
+# WEB APP POD — public-facing, source node for attack path
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: app
+  labels:
+    app: web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      serviceAccountName: sa-web
+      containers:
+        - name: web
+          image: nginx:1.21              # older nginx — has known CVEs
+          ports:
+            - containerPort: 80
+
+---
+# PRODUCTION DB — crown jewel sink node
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-db
+  namespace: data
+  labels:
+    app: production-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: production-db
+  template:
+    metadata:
+      labels:
+        app: production-db
+    spec:
+      serviceAccountName: sa-db
+      containers:
+        - name: postgres
+          image: postgres:13             # older version
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-db-credentials
+                  key: password

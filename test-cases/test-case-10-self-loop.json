@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "cluster": "test-self-loop",
+    "generated": "2026-04-05",
+    "node_count": 3,
+    "edge_count": 4,
+    "pre_planted_paths": 1,
+    "description": "Test Case 10: Graph with a self-loop on node B. A→B→C where B also has B→B. Tests DFS self-loop cycle detection and that Dijkstra ignores self-loops."
+  },
+  "nodes": [
+    {"id": "A", "type": "User",     "name": "attacker",  "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",      "name": "loop-pod",  "namespace": "default",  "risk_score": 6.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "Database", "name": "target-db", "namespace": "data",     "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "can-exec",         "weight": 3.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "B", "relationship": "self-escalate",    "weight": 1.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "C", "relationship": "grants-access-to", "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "A", "target": "C", "relationship": "grants-access-to", "weight": 20.0,"cve": null, "cvss": null}
+  ]
+}

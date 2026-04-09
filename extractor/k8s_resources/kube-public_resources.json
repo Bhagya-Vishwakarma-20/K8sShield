@@ -1,0 +1,263 @@
+{
+  "namespace": "kube-public",
+  "resources": {
+    "pods": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "services": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "deployments": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "roles": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "Role",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:17Z",
+            "name": "kubeadm:bootstrap-signer-clusterinfo",
+            "namespace": "kube-public",
+            "resourceVersion": "225",
+            "uid": "6f706a88-f86b-44cc-ab0f-8e561186d5e8"
+          },
+          "rules": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resourceNames": [
+                "cluster-info"
+              ],
+              "resources": [
+                "configmaps"
+              ],
+              "verbs": [
+                "get"
+              ]
+            }
+          ]
+        },
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "Role",
+          "metadata": {
+            "annotations": {
+              "rbac.authorization.kubernetes.io/autoupdate": "true"
+            },
+            "creationTimestamp": "2026-04-08T19:54:17Z",
+            "labels": {
+              "kubernetes.io/bootstrapping": "rbac-defaults"
+            },
+            "name": "system:controller:bootstrap-signer",
+            "namespace": "kube-public",
+            "resourceVersion": "196",
+            "uid": "5251a308-f951-4a86-875a-7f84143b6e33"
+          },
+          "rules": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "configmaps"
+              ],
+              "verbs": [
+                "get",
+                "list",
+                "watch"
+              ]
+            },
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resourceNames": [
+                "cluster-info"
+              ],
+              "resources": [
+                "configmaps"
+              ],
+              "verbs": [
+                "update"
+              ]
+            },
+            {
+              "apiGroups": [
+                "",
+                "events.k8s.io"
+              ],
+              "resources": [
+                "events"
+              ],
+              "verbs": [
+                "create",
+                "patch",
+                "update"
+              ]
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "rolebindings": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "RoleBinding",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:18Z",
+            "name": "kubeadm:bootstrap-signer-clusterinfo",
+            "namespace": "kube-public",
+            "resourceVersion": "226",
+            "uid": "651cb23d-ce4e-4a40-92a0-ebdd7e2fb368"
+          },
+          "roleRef": {
+            "apiGroup": "rbac.authorization.k8s.io",
+            "kind": "Role",
+            "name": "kubeadm:bootstrap-signer-clusterinfo"
+          },
+          "subjects": [
+            {
+              "apiGroup": "rbac.authorization.k8s.io",
+              "kind": "User",
+              "name": "system:anonymous"
+            }
+          ]
+        },
+        {
+          "apiVersion": "rbac.authorization.k8s.io/v1",
+          "kind": "RoleBinding",
+          "metadata": {
+            "annotations": {
+              "rbac.authorization.kubernetes.io/autoupdate": "true"
+            },
+            "creationTimestamp": "2026-04-08T19:54:17Z",
+            "labels": {
+              "kubernetes.io/bootstrapping": "rbac-defaults"
+            },
+            "name": "system:controller:bootstrap-signer",
+            "namespace": "kube-public",
+            "resourceVersion": "203",
+            "uid": "d40d6fbf-5d21-44f6-af1c-cb112419e3a2"
+          },
+          "roleRef": {
+            "apiGroup": "rbac.authorization.k8s.io",
+            "kind": "Role",
+            "name": "system:controller:bootstrap-signer"
+          },
+          "subjects": [
+            {
+              "kind": "ServiceAccount",
+              "name": "bootstrap-signer",
+              "namespace": "kube-system"
+            }
+          ]
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "serviceaccounts": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "default",
+            "namespace": "kube-public",
+            "resourceVersion": "322",
+            "uid": "a2fbae4e-3583-4884-beb2-2ada57597e2e"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "secrets": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "configmaps": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "jws-kubeconfig-abcdef": "eyJhbGciOiJIUzI1NiIsImtpZCI6ImFiY2RlZiJ9..FfMcqI0hLIAAfC67gbCKC6EmejxvocFAnmOdk1b1Sp8",
+            "kubeconfig": "apiVersion: v1\nclusters:\n- cluster:\n    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJZG9yTUZCU3hDTUV3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TmpBME1EZ3hPVFE1TURsYUZ3MHpOakEwTURVeE9UVTBNRGxhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUUNkNkphYUUxU1FjWkN0cWQyeXJveVlXNTJpNkREdFZuaTFvQ1hrOFhObTNJS3pEWXlMVk4zV3BoWlcKMjdrcmFWK285eHdMNWFIejFGSzJqekw1QlhhSjV4cVdGUHR5RGVSUXQxWW9LR2Q3SzN3c1QxZmx2YzRBL0ZMQgpJQUdqYVBlUGxEbCtFM2JtN3J3V3plMU42bmVaYi9yOUliZ0ZZSldzbWgwTTJ0UGxDZDZlNnVHVEFzeFMyMmxaCnRBeGxWcnViUkVTMUdQL1UzNE5USWd0cHZPU0YzcXBuUEg5bTF4Z05oUmc0VkNackVreWVJTzU5bitDalNpcVcKQjVZR21EVnpRaDJsTGQ1TktNY2xiWUFlZno4eWVnbnBrazRGbFNmQzJzdW1XeUZJVEp2WHVKdS9aSVZPYUcxSgpuU2ZMSWlPK1pLbGdFdkZuajVOdlpyOUE0OVh0QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUcmFxejZIUHREcU5TdDVjbHhwTk1jZ1BRZmhqQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQk5hay9ydUIrcQovRklvcjhLeGNsT2hmUHNVRGFTc1V5d1N6T2p6bFlwbHRYajgzK2ZXRkNOajdVaS8vWEY3clRMMFQ5YlBsVEZrCkRtTDhLWDU5MDFvSW1NSHphd0xnMzM4eGFTTkdPMHM2K3RzK0NmdXQxTjVOUGZWeUZIZDVwRDhOclFJNlNNeDEKNDhQZDlWZHh5MEgzSnRZUEQxZVpydkxHbFBrYTQrY2hNalZJU0ZtWXA1YWJoUk9jeTZTbGZOd01TUTVWTnVXdQo3SG8wbU5zZHdhb0FTeEtOaDc3NnFnOGlybUhhVW9zVVAzS1NGK1VHN2phRm1aSjQ2OThHNFliQm9zWHRPUTg3Ci9aZzhhNHVTajBieXA2WHZ3bjZ1Tk5SL3h4MTBSYmZ1UUU0aXJQOHBIZWlQMnF1LzRSd1hRdzV0TVRsKzRJckIKREswREFQNCtSRWN4Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K\n    server: https://kind-control-plane:6443\n  name: \"\"\ncontexts: null\ncurrent-context: \"\"\nkind: Config\nusers: null\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:54:17Z",
+            "name": "cluster-info",
+            "namespace": "kube-public",
+            "resourceVersion": "318",
+            "uid": "fbfa8a0a-884d-4174-a022-60b7b0697e60"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "data": {
+            "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIdorMFBSxCMEwDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA0MDgxOTQ5MDlaFw0zNjA0MDUxOTU0MDlaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQCd6JaaE1SQcZCtqd2yroyYW52i6DDtVni1oCXk8XNm3IKzDYyLVN3WphZW\n27kraV+o9xwL5aHz1FK2jzL5BXaJ5xqWFPtyDeRQt1YoKGd7K3wsT1flvc4A/FLB\nIAGjaPePlDl+E3bm7rwWze1N6neZb/r9IbgFYJWsmh0M2tPlCd6e6uGTAsxS22lZ\ntAxlVrubRES1GP/U34NTIgtpvOSF3qpnPH9m1xgNhRg4VCZrEkyeIO59n+CjSiqW\nB5YGmDVzQh2lLd5NKMclbYAefz8yegnpkk4FlSfC2sumWyFITJvXuJu/ZIVOaG1J\nnSfLIiO+ZKlgEvFnj5NvZr9A49XtAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTraqz6HPtDqNSt5clxpNMcgPQfhjAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQBNak/ruB+q\n/FIor8KxclOhfPsUDaSsUywSzOjzlYpltXj83+fWFCNj7Ui//XF7rTL0T9bPlTFk\nDmL8KX5901oImMHzawLg338xaSNGO0s6+ts+Cfut1N5NPfVyFHd5pD8NrQI6SMx1\n48Pd9Vdxy0H3JtYPD1eZrvLGlPka4+chMjVISFmYp5abhROcy6SlfNwMSQ5VNuWu\n7Ho0mNsdwaoASxKNh776qg8irmHaUosUP3KSF+UG7jaFmZJ4698G4YbBosXtOQ87\n/Zg8a4uSj0byp6Xvwn6uNNR/xx10RbfuQE4irP8pHeiP2qu/4RwXQw5tMTl+4IrB\nDK0DAP4+REcx\n-----END CERTIFICATE-----\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+            },
+            "creationTimestamp": "2026-04-08T19:54:25Z",
+            "name": "kube-root-ca.crt",
+            "namespace": "kube-public",
+            "resourceVersion": "330",
+            "uid": "26263a7d-cc61-43b1-bd3c-5a0500160f7e"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "networkpolicies": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    }
+  }
+}

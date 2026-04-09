@@ -1,0 +1,30 @@
+# Web app service — LoadBalancer marks it as internet-facing
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: app
+spec:
+  selector:
+    app: web-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+---
+# Postgres service — internal database endpoint
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-svc
+  namespace: data
+spec:
+  selector:
+    app: production-db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP

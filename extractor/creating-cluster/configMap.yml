@@ -1,0 +1,38 @@
+# Frontend config — contains internal service URLs (useful for lateral movement)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-frontend-config
+  namespace: frontend
+  labels:
+    sensitivity: low
+data:
+  BACKEND_URL: "http://backend-svc.backend.svc.cluster.local:8080"
+  ENV: "production"
+
+---
+# Backend config — contains DB host (not password, but a navigation clue)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-backend-config
+  namespace: backend
+  labels:
+    sensitivity: medium
+data:
+  DB_HOST: "postgres-svc.data.svc.cluster.local"
+  DB_PORT: "5432"
+  DB_NAME: "production_db"
+
+---
+# DB config — non-sensitive, but attacker can confirm target from here
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-db-config
+  namespace: data
+  labels:
+    sensitivity: low
+data:
+  MAX_CONNECTIONS: "100"
+  REPLICATION_MODE: "async"

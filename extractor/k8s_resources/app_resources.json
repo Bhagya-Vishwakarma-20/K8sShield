@@ -1,0 +1,490 @@
+{
+  "namespace": "app",
+  "resources": {
+    "pods": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "generateName": "web-app-7878b7986b-",
+            "generation": 1,
+            "labels": {
+              "app": "web-app",
+              "pod-template-hash": "7878b7986b"
+            },
+            "name": "web-app-7878b7986b-pbr98",
+            "namespace": "app",
+            "ownerReferences": [
+              {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "web-app-7878b7986b",
+                "uid": "f289249e-1ef6-4840-a1ca-cafe5477d92b"
+              }
+            ],
+            "resourceVersion": "650",
+            "uid": "38dc801b-5197-4738-b0d9-a4d3fb444e16"
+          },
+          "spec": {
+            "containers": [
+              {
+                "image": "nginx:1.21",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "web",
+                "ports": [
+                  {
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-455kw",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "enableServiceLinks": true,
+            "nodeName": "k8s-simple-lab-worker",
+            "preemptionPolicy": "PreemptLowerPriority",
+            "priority": 0,
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {},
+            "serviceAccount": "sa-web",
+            "serviceAccountName": "sa-web",
+            "terminationGracePeriodSeconds": 30,
+            "tolerations": [
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              },
+              {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+              }
+            ],
+            "volumes": [
+              {
+                "name": "kube-api-access-455kw",
+                "projected": {
+                  "defaultMode": 420,
+                  "sources": [
+                    {
+                      "serviceAccountToken": {
+                        "expirationSeconds": 3607,
+                        "path": "token"
+                      }
+                    },
+                    {
+                      "configMap": {
+                        "items": [
+                          {
+                            "key": "ca.crt",
+                            "path": "ca.crt"
+                          }
+                        ],
+                        "name": "kube-root-ca.crt"
+                      }
+                    },
+                    {
+                      "downwardAPI": {
+                        "items": [
+                          {
+                            "fieldRef": {
+                              "apiVersion": "v1",
+                              "fieldPath": "metadata.namespace"
+                            },
+                            "path": "namespace"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "status": {
+            "conditions": [
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:51:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodReadyToStartContainers"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Initialized"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:51:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Ready"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:51:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "ContainersReady"
+              },
+              {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodScheduled"
+              }
+            ],
+            "containerStatuses": [
+              {
+                "containerID": "containerd://77d71296d75921644ffb8c403d712df90eab9e2b3dbc8671cdf450353151480d",
+                "image": "docker.io/library/nginx:1.21",
+                "imageID": "docker.io/library/nginx@sha256:2bcabc23b45489fb0885d69a06ba1d648aeda973fae7bb981bafbb884165e514",
+                "lastState": {},
+                "name": "web",
+                "ready": true,
+                "resources": {},
+                "restartCount": 0,
+                "started": true,
+                "state": {
+                  "running": {
+                    "startedAt": "2026-04-08T19:51:21Z"
+                  }
+                },
+                "user": {
+                  "linux": {
+                    "gid": 0,
+                    "supplementalGroups": [
+                      0
+                    ],
+                    "uid": 0
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                    "name": "kube-api-access-455kw",
+                    "readOnly": true,
+                    "recursiveReadOnly": "Disabled"
+                  }
+                ]
+              }
+            ],
+            "hostIP": "172.21.0.6",
+            "hostIPs": [
+              {
+                "ip": "172.21.0.6"
+              }
+            ],
+            "observedGeneration": 1,
+            "phase": "Running",
+            "podIP": "10.244.1.2",
+            "podIPs": [
+              {
+                "ip": "10.244.1.2"
+              }
+            ],
+            "qosClass": "BestEffort",
+            "startTime": "2026-04-08T19:50:21Z"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "services": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{},\"name\":\"web-svc\",\"namespace\":\"app\"},\"spec\":{\"ports\":[{\"port\":80,\"protocol\":\"TCP\",\"targetPort\":80}],\"selector\":{\"app\":\"web-app\"},\"type\":\"LoadBalancer\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:22Z",
+            "name": "web-svc",
+            "namespace": "app",
+            "resourceVersion": "555",
+            "uid": "c69d96b1-754c-463c-b5d0-bf407437b0dc"
+          },
+          "spec": {
+            "allocateLoadBalancerNodePorts": true,
+            "clusterIP": "10.96.152.57",
+            "clusterIPs": [
+              "10.96.152.57"
+            ],
+            "externalTrafficPolicy": "Cluster",
+            "internalTrafficPolicy": "Cluster",
+            "ipFamilies": [
+              "IPv4"
+            ],
+            "ipFamilyPolicy": "SingleStack",
+            "ports": [
+              {
+                "nodePort": 30361,
+                "port": 80,
+                "protocol": "TCP",
+                "targetPort": 80
+              }
+            ],
+            "selector": {
+              "app": "web-app"
+            },
+            "sessionAffinity": "None",
+            "type": "LoadBalancer"
+          },
+          "status": {
+            "loadBalancer": {}
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "deployments": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {
+              "deployment.kubernetes.io/revision": "1",
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"web-app\"},\"name\":\"web-app\",\"namespace\":\"app\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"web-app\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"web-app\"}},\"spec\":{\"containers\":[{\"image\":\"nginx:1.21\",\"name\":\"web\",\"ports\":[{\"containerPort\":80}]}],\"serviceAccountName\":\"sa-web\"}}}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "generation": 1,
+            "labels": {
+              "app": "web-app"
+            },
+            "name": "web-app",
+            "namespace": "app",
+            "resourceVersion": "654",
+            "uid": "0bf1b715-7ede-4c91-a13a-d9a315bed904"
+          },
+          "spec": {
+            "progressDeadlineSeconds": 600,
+            "replicas": 1,
+            "revisionHistoryLimit": 10,
+            "selector": {
+              "matchLabels": {
+                "app": "web-app"
+              }
+            },
+            "strategy": {
+              "rollingUpdate": {
+                "maxSurge": "25%",
+                "maxUnavailable": "25%"
+              },
+              "type": "RollingUpdate"
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "web-app"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "image": "nginx:1.21",
+                    "imagePullPolicy": "IfNotPresent",
+                    "name": "web",
+                    "ports": [
+                      {
+                        "containerPort": 80,
+                        "protocol": "TCP"
+                      }
+                    ],
+                    "resources": {},
+                    "terminationMessagePath": "/dev/termination-log",
+                    "terminationMessagePolicy": "File"
+                  }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "sa-web",
+                "serviceAccountName": "sa-web",
+                "terminationGracePeriodSeconds": 30
+              }
+            }
+          },
+          "status": {
+            "availableReplicas": 1,
+            "conditions": [
+              {
+                "lastTransitionTime": "2026-04-08T19:51:21Z",
+                "lastUpdateTime": "2026-04-08T19:51:21Z",
+                "message": "Deployment has minimum availability.",
+                "reason": "MinimumReplicasAvailable",
+                "status": "True",
+                "type": "Available"
+              },
+              {
+                "lastTransitionTime": "2026-04-08T19:50:21Z",
+                "lastUpdateTime": "2026-04-08T19:51:21Z",
+                "message": "ReplicaSet \"web-app-7878b7986b\" has successfully progressed.",
+                "reason": "NewReplicaSetAvailable",
+                "status": "True",
+                "type": "Progressing"
+              }
+            ],
+            "observedGeneration": 1,
+            "readyReplicas": 1,
+            "replicas": 1,
+            "terminatingReplicas": 0,
+            "updatedReplicas": 1
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "roles": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "rolebindings": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "serviceaccounts": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "creationTimestamp": "2026-04-08T19:50:20Z",
+            "name": "default",
+            "namespace": "app",
+            "resourceVersion": "513",
+            "uid": "9002b0f3-62b9-47af-ba0e-4d17701b71fc"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "ServiceAccount",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"annotations\":{},\"name\":\"sa-web\",\"namespace\":\"app\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "name": "sa-web",
+            "namespace": "app",
+            "resourceVersion": "518",
+            "uid": "8a936000-4076-48b0-ba69-009f830b6588"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "secrets": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "configmaps": {
+      "apiVersion": "v1",
+      "items": [
+        {
+          "apiVersion": "v1",
+          "data": {
+            "DB_HOST": "postgres-svc.data.svc.cluster.local",
+            "DB_PORT": "5432",
+            "ENV": "production"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"DB_HOST\":\"postgres-svc.data.svc.cluster.local\",\"DB_PORT\":\"5432\",\"ENV\":\"production\"},\"kind\":\"ConfigMap\",\"metadata\":{\"annotations\":{},\"labels\":{\"sensitivity\":\"low\"},\"name\":\"cm-app-config\",\"namespace\":\"app\"}}\n"
+            },
+            "creationTimestamp": "2026-04-08T19:50:21Z",
+            "labels": {
+              "sensitivity": "low"
+            },
+            "name": "cm-app-config",
+            "namespace": "app",
+            "resourceVersion": "521",
+            "uid": "776ce8b2-dcab-4dde-8f39-c73057fa8d07"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "data": {
+            "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIDBTCCAe2gAwIBAgIIYcLyvW6FiDowDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczAeFw0yNjA0MDgxOTQ0NDlaFw0zNjA0MDUxOTQ5NDlaMBUx\nEzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK\nAoIBAQC+IuyH0ibPPyVQRKUvfLC9mgAeXWw5zR2CWyT2Q9gB7aWLpT5lvi83wsQM\nF7gTFMeEUNUb62/WQatbgY/ieDBwdWUOJebIPVUun/ynwkMzkJ7bMIv4450Py5g2\nDTWZv0p2vENjY6/X554briP3rn/ZnR3/yNfbSXeXVNK6TiBULm1mmIvGJKD24oft\nvyeMJQjDyIFfapx0aM1PK5Rf9Ma+PnPN35wm/x13uADMT0x+9Jl/sqzuTXNNzjt5\nHBlSsrbvLIeYe4fqd1UoLl7rXJ0Xnqok3ZV9GZirxh0Cf9vcTSsRViXSEJAYomOR\nTOOsHOQIfviiCBGHSHlXkLLJ6LKjAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP\nBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSt1LbL+O6d3MqKH37AXA98PNmWJzAV\nBgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQCYnc/CcaGM\nwH8SVSRoWCF0Ju17QWNwj1QxW3KASgtbJ6WTp+VYNTxDPENdFUr+/9vX0cnpOnN+\ngDwWxrc2/e+YtaE+NkxpwhiIcPxRKOgBlqbFM6EBaOoKQrT8lyB7cSLb2qSliyJY\netFxUZSP7M7TU/cdjR7VbGuv7qaYj31xQMUv64pZueog/qLhWf9WWvW5/j1dA+g/\nmyc53LVPSrTAVcU/mcKmb8KxM+pfdvn8/6NkEteYv/23QwaDaSBKDrKUqQGbDhbB\n+vuvdxRnzq8v9JLh2RMyKciHednYnilPtFPfga895PM+TqeaUP8xopQ7dcm9euHs\nuv5/JToFKzyT\n-----END CERTIFICATE-----\n"
+          },
+          "kind": "ConfigMap",
+          "metadata": {
+            "annotations": {
+              "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+            },
+            "creationTimestamp": "2026-04-08T19:50:20Z",
+            "name": "kube-root-ca.crt",
+            "namespace": "app",
+            "resourceVersion": "514",
+            "uid": "63525334-fbed-46d2-9ab5-ff67ac03a44f"
+          }
+        }
+      ],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    },
+    "networkpolicies": {
+      "apiVersion": "v1",
+      "items": [],
+      "kind": "List",
+      "metadata": {
+        "resourceVersion": ""
+      }
+    }
+  }
+}

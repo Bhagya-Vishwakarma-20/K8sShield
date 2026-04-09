@@ -1,0 +1,16 @@
+# app namespace — where all workloads live
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: app
+  labels:
+    team: app
+
+---
+# data namespace — database and secrets (crown jewels)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: data
+  labels:
+    team: data

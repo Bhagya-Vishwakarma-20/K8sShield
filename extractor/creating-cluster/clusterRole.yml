@@ -1,0 +1,22 @@
+# ClusterRole: read-only across all namespaces — monitoring needs this, but it's overly broad
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cr-cluster-reader
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "services", "secrets", "configmaps", "serviceaccounts"]
+    verbs: ["get", "list", "watch"]   # can LIST secrets cluster-wide — dangerous
+
+---
+# ClusterRole: node reader — used for blast radius expansion test
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cr-node-reader
+  labels: {}
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]

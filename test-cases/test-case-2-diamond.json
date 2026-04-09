@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "cluster": "test-diamond",
+    "generated": "2026-04-05",
+    "node_count": 4,
+    "edge_count": 4,
+    "pre_planted_paths": 2,
+    "description": "Test Case 2: Diamond graph — A→B→D and A→C→D with different weights. Dijkstra must pick the cheaper path. BFS should find B and C at the same depth."
+  },
+  "nodes": [
+    {"id": "A", "type": "ExternalActor", "name": "internet",    "namespace": "external", "risk_score": 10.0, "is_source": true,  "is_sink": false, "cves": []},
+    {"id": "B", "type": "Pod",            "name": "fast-path",   "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "C", "type": "Pod",            "name": "slow-path",   "namespace": "default",  "risk_score": 5.0,  "is_source": false, "is_sink": false, "cves": []},
+    {"id": "D", "type": "Database",       "name": "prod-db",     "namespace": "data",     "risk_score": 10.0, "is_source": false, "is_sink": true,  "cves": []}
+  ],
+  "edges": [
+    {"source": "A", "target": "B", "relationship": "reaches",          "weight": 1.0, "cve": null, "cvss": null},
+    {"source": "A", "target": "C", "relationship": "reaches",          "weight": 5.0, "cve": null, "cvss": null},
+    {"source": "B", "target": "D", "relationship": "grants-access-to", "weight": 2.0, "cve": null, "cvss": null},
+    {"source": "C", "target": "D", "relationship": "grants-access-to", "weight": 1.0, "cve": null, "cvss": null}
+  ]
+}
